@@ -17,7 +17,16 @@ ADirtParent::ADirtParent()
 void ADirtParent::BeginPlay()
 {
 	Super::BeginPlay();
-	
+}
+
+
+void ADirtParent::TakeDamage() {
+	DamageStage += 1;
+	if(Health <= DamageStage) {
+		Destroy();
+		return;
+	}
+	StaticMeshComp->SetMaterial(0, MaterialList[DamageStage]);
 }
 
 

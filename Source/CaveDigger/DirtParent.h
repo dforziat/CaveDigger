@@ -21,9 +21,18 @@ protected:
 
 public:	
 
+	void TakeDamage();
+
 private:
 
 	UPROPERTY(EditDefaultsOnly)
 	UStaticMeshComponent* StaticMeshComp;
 
+	UPROPERTY(EditDefaultsOnly)
+	TArray<UMaterial*> MaterialList;
+
+
+	int32 DamageStage = 0;
+	int32 Health = 3;
+	
 };
