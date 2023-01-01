@@ -4,40 +4,34 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "DirtParent.generated.h"
+#include "GemParent.generated.h"
 
 UCLASS()
-class CAVEDIGGER_API ADirtParent : public AActor
+class CAVEDIGGER_API AGemParent : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ADirtParent();
+	AGemParent();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:	
-
-	void TakeDigDamage();
-
-private:
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditDefaultsOnly)
-	UStaticMeshComponent* StaticMeshComp;
+	float Value = 100;
+
+private: 
 
 	UPROPERTY(EditDefaultsOnly)
-	TArray<UMaterial*> MaterialList;
+	class UBoxComponent* BoxComp;
 
 	UPROPERTY(EditDefaultsOnly)
-	UClass* GemBluePrint;
+	class UPaperFlipbookComponent* FlipbookComp;
 
-
-	int32 DamageStage = 0;
-	int32 Health = 3;
-
-	
-	void DropGem();
 };

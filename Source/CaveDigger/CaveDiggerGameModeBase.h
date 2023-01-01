@@ -13,5 +13,15 @@ UCLASS()
 class CAVEDIGGER_API ACaveDiggerGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
+
+public:
+
+	void AddScore(float Value);
+	
+	float GetScore();
+
+private:
+	UPROPERTY(EditAnywhere)
+	float Score = 0;
 	
 };

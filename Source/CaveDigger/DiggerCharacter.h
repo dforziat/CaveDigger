@@ -27,6 +27,9 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UFUNCTION()
+	void OnActorOverlap(AActor* OverlappedActor, AActor* OtherActor);
+
 private:
 	UPROPERTY(EditDefaultsOnly)
 	class UInputMappingContext* InputMapping;
@@ -96,6 +99,5 @@ private:
 	void CheckSpriteJump();
 	void ResetAttackTimer();
 	void ResetDigTimer();
-	void ChangeState();
 
 };

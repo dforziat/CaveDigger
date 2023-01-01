@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "DirtParent.h"
+#include "GemParent.h"
+
 
 // Sets default values
 ADirtParent::ADirtParent()
@@ -20,13 +21,19 @@ void ADirtParent::BeginPlay()
 }
 
 
-void ADirtParent::TakeDamage() {
+void ADirtParent::TakeDigDamage() {
 	DamageStage += 1;
 	if(Health <= DamageStage) {
+		if (GemBluePrint != nullptr) {
+			GetWorld()->SpawnActor<AGemParent>(GemBluePrint, GetActorLocation(), GetActorRotation());
+		}
 		Destroy();
 		return;
 	}
-	StaticMeshComp->SetMaterial(0, MaterialList[DamageStage]);
+	StaticMeshComp->SetMaterial(0, MaterialList[DamageStage - 1]);
 }
 
+void ADirtParent::DropGem() {
+
+}
 

@@ -13,6 +13,12 @@
 #include "Kismet/GameplayStatics.h"
 #include "Attack.h"
 #include "Components/SpotLightComponent.h"
+#include "Components/CapsuleComponent.h"
+#include "DirtParent.h"
+#include "GemParent.h"
+#include "CaveDiggerGameModeBase.h"
+
+
 
 
 
@@ -37,6 +43,7 @@ ADiggerCharacter::ADiggerCharacter()
 void ADiggerCharacter::BeginPlay()
 {
 	Super::BeginPlay();	
+	OnActorBeginOverlap.AddDynamic(this, &ADiggerCharacter::OnActorOverlap);
 }
 
 // Called every frame
@@ -92,7 +99,6 @@ void ADiggerCharacter::Attack(const FInputActionInstance& Instance) {
 		TArray<AActor*> AttackArray;
 		UGameplayStatics::GetAllActorsWithTag(this, TEXT("Attack"), AttackArray);
 		if (AttackArray.Num() > 0) return;
-		//UE_LOG(LogTemp, Display, TEXT("Num of Attacks: %d"), AttackArray.Num());
 
 		State = ATTACK_STATE;
 		FlipbookComp->SetFlipbook(AttackFlipbook);
@@ -113,6 +119,19 @@ void ADiggerCharacter::Dig(const FInputActionInstance& Instance) {
 	State = DIG_STATE;
 	FlipbookComp->SetFlipbook(DigFlipbook);
 	GetWorldTimerManager().SetTimer(DigTimerHandle, this, &ADiggerCharacter::ResetDigTimer, DigFlipbook->GetTotalDuration(), true);
+
+	//Create LineCast
+	FCollisionQueryParams QueryParams;
+	QueryParams.AddIgnoredActor(this);
+	FHitResult HitResult;
+	bool hit = GetWorld()->LineTraceSingleByChannel(HitResult, GetActorLocation(), GetActorLocation() + FVector(0,0,-100), ECollisionChannel::ECC_Pawn, QueryParams);
+	if (hit) {
+		if (HitResult.GetActor()->ActorHasTag(TEXT("Dirt"))) {
+			Cast<ADirtParent>(HitResult.GetActor())->TakeDigDamage();
+		}
+	}
+	DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + FVector(0, 0, -100), FColor::Red, true, 5);
+
 }
 
 void ADiggerCharacter::CheckSpriteRotation() {
@@ -152,4 +171,20 @@ void ADiggerCharacter::ResetDigTimer() {
 	State = IDLE_STATE;
 	GetWorldTimerManager().ClearTimer(DigTimerHandle);
 	FlipbookComp->SetFlipbook(IdleFlipbook);
+}
+
+void ADiggerCharacter::OnActorOverlap(AActor* OverlappedActor, AActor* OtherActor) {
+	if (OtherActor == nullptr) return;
+	UE_LOG(LogTemp, Warning, TEXT("Player On overlap with %s"), *OtherActor->GetActorNameOrLabel());
+	if (OtherActor->ActorHasTag("Gem")) {
+		UE_LOG(LogTemp, Warning, TEXT("Player On overlap with Gem"));
+		auto Gem = Cast<AGemParent>(OtherActor);
+		//Get GameMode and Add Gem Value to it. 
+		if (auto GameMode = Cast<ACaveDiggerGameModeBase>(UGameplayStatics::GetGameMode(this))) {
+			GameMode->AddScore(Gem->Value);
+			UE_LOG(LogTemp, Warning, TEXT("Player Score: %f"), GameMode->GetScore());
+		}
+		//Play Pickup sound
+		Gem->Destroy();
+	}
 }
