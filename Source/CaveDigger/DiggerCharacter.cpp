@@ -105,6 +105,7 @@ void ADiggerCharacter::Attack(const FInputActionInstance& Instance) {
 		GetWorldTimerManager().SetTimer(AttackTimerHandle, this, &ADiggerCharacter::ResetAttackTimer, AttackFlipbook->GetTotalDuration(), true);
 		UE_LOG(LogTemp, Display, TEXT("Sprite Rotation = %f"), FlipbookComp->GetRelativeRotation().Yaw);
 		FVector SpawnLocation = GetActorLocation();
+		SpawnLocation.Z += 10;
 		if (FlipbookComp->GetRelativeRotation().Yaw > 0) {
 			SpawnLocation.Y += AttackDistOffset;
 		}

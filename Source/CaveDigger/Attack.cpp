@@ -6,6 +6,7 @@
 #include "PaperFlipbookComponent.h"
 #include "PaperFlipbook.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "DirtParent.h"
 
 
 // Sets default values
@@ -25,16 +26,24 @@ void AAttack::BeginPlay()
 {
 	Super::BeginPlay();
 	GetWorldTimerManager().SetTimer(DestructionTimerHandle, this, &AAttack::DestroySelf, FlipbookComp->GetFlipbook()->GetTotalDuration(), true);
+	OnActorBeginOverlap.AddDynamic(this, &AAttack::OnActorOverlap);
 }
 
 // Called every frame
 void AAttack::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void AAttack::DestroySelf() {
 	Destroy();
 }
 
+void AAttack::OnActorOverlap(AActor* OverlappedActor, AActor* OtherActor) {
+	UE_LOG(LogTemp, Warning, TEXT("Attack Overlap Actor with %s"), *OtherActor->GetActorNameOrLabel());
+	if (OtherActor->ActorHasTag("Dirt")) {
+		auto Dirt = Cast<ADirtParent>(OtherActor);
+		Dirt->TakeDigDamage();
+	}
+	Destroy();
+}

@@ -87,7 +87,7 @@ private:
 	FString State = IDLE_STATE;
 	FTimerHandle AttackTimerHandle;
 	FTimerHandle DigTimerHandle;
-	float AttackDistOffset = 100;
+	float AttackDistOffset = 80;
 
 
 	void MoveRight(const FInputActionInstance& Instance);

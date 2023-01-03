@@ -4,43 +4,50 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Attack.generated.h"
+#include "LevelGenerator.generated.h"
 
 UCLASS()
-class CAVEDIGGER_API AAttack : public AActor
+class CAVEDIGGER_API ALevelGenerator : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AAttack();
+	ALevelGenerator();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	UFUNCTION()
-	void OnActorOverlap(AActor* OverlappedActor, AActor* OtherActor);
 
 private:
-	UPROPERTY(EditDefaultsOnly)
-	class UCapsuleComponent* CapsuleCollider;
-	UPROPERTY(EditDefaultsOnly)
-	class UPaperFlipbookComponent* FlipbookComp;
-	UPROPERTY(EditDefaultsOnly)
-	class UProjectileMovementComponent* ProjectileMovementComp;
 
 	UPROPERTY(EditDefaultsOnly)
-	float MoveSpeed = 10;
+	UClass* DirtBlueprint;
+
 	UPROPERTY(EditDefaultsOnly)
-	float AttackTimer = 2;
+	UClass* WallBlueprint;
 
-	FTimerHandle DestructionTimerHandle;
+	UPROPERTY(EditDefaultsOnly)
+	UClass* WallCornerBlueprint;
 
-	void DestroySelf();
+	UPROPERTY(EditAnywhere)
+	FVector StartLocation;
 
+	UPROPERTY(EditDefaultsOnly)
+	float IncrementDistance = 100;
+
+	UPROPERTY(EditDefaultsOnly)
+	int32 MaxRows = 50;
+
+	UPROPERTY(EditDefaultsOnly)
+	int32 MaxColumns = 10;
+
+	FString LastPlacedObject = "Dirt";
+
+
+	void GenerateLevel();
+	void SpawnWalls();
+	void ChooseRandomObject();
 };
