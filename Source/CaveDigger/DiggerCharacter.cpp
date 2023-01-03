@@ -13,15 +13,11 @@
 #include "Kismet/GameplayStatics.h"
 #include "Attack.h"
 #include "Components/SpotLightComponent.h"
+#include "Components/PointLightComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "DirtParent.h"
 #include "GemParent.h"
 #include "CaveDiggerGameModeBase.h"
-
-
-
-
-
 
 
 // Sets default values
@@ -37,6 +33,8 @@ ADiggerCharacter::ADiggerCharacter()
 	FlipbookComp->SetupAttachment(RootComponent);
 	SpotLight = CreateDefaultSubobject<USpotLightComponent>("SpotLight");
 	SpotLight->SetupAttachment(FlipbookComp);
+	PointLight = CreateDefaultSubobject<UPointLightComponent>(TEXT("Point Light"));
+	PointLight->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned

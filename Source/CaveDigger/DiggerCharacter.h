@@ -56,6 +56,9 @@ private:
 	class USpotLightComponent* SpotLight;
 
 	UPROPERTY(EditDefaultsOnly)
+	class UPointLightComponent* PointLight;
+
+	UPROPERTY(EditDefaultsOnly)
 	UClass* AttackBlueprint;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Flipbooks")

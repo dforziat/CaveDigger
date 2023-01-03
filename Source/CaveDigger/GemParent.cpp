@@ -5,6 +5,8 @@
 #include "PaperSpriteComponent.h"
 #include "Components/BoxComponent.h"
 #include "PaperFlipbookComponent.h"
+#include "Components/PointLightComponent.h"
+
 
 
 
@@ -16,10 +18,10 @@ AGemParent::AGemParent()
 
 	BoxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Comp"));
 	SetRootComponent(BoxComp);
-
 	FlipbookComp = CreateDefaultSubobject<UPaperFlipbookComponent>(TEXT("Flipbook Comp"));
 	FlipbookComp->SetupAttachment(RootComponent);
-
+	PointLight = CreateDefaultSubobject<UPointLightComponent>(TEXT("Point Light"));
+	PointLight->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned

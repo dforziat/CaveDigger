@@ -34,4 +34,7 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	class UPaperFlipbookComponent* FlipbookComp;
 
+	UPROPERTY(EditDefaultsOnly)
+	class UPointLightComponent* PointLight;
+
 };
