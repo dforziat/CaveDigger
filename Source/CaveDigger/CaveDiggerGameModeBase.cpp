@@ -13,3 +13,7 @@ float ACaveDiggerGameModeBase::GetScore() {
 	return Score;
 }
 
+float ACaveDiggerGameModeBase::GetRequiredScore() {
+	return RequiredScore;
+}
+

@@ -50,6 +50,10 @@ void ADiggerCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	CheckSpriteRotation();
 	CheckSpriteJump();
+
+	if (IsInvincible) {
+		FlickerSprite();
+	}
 }
 
 // Called to bind functionality to input
@@ -129,7 +133,7 @@ void ADiggerCharacter::Dig(const FInputActionInstance& Instance) {
 			Cast<ADirtParent>(HitResult.GetActor())->TakeDigDamage();
 		}
 	}
-	DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + FVector(0, 0, -100), FColor::Red, true, 5);
+	//DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + FVector(0, 0, -100), FColor::Red, true, 5);
 
 }
 
@@ -186,4 +190,31 @@ void ADiggerCharacter::OnActorOverlap(AActor* OverlappedActor, AActor* OtherActo
 		//Play Pickup sound
 		Gem->Destroy();
 	}
+	else if (OtherActor->ActorHasTag("Enemy")) {
+		RecieveDamage(1);
+	}
+}
+
+
+
+void ADiggerCharacter::RecieveDamage(int32 Damage) {
+	if (IsInvincible) return;
+	UE_LOG(LogTemp, Warning, TEXT("Took Damage from Enemy!"));
+	//Manage Invincible stuff
+	IsInvincible = true;
+	GetWorldTimerManager().SetTimer(InvincibleTimerHandle, this, &ADiggerCharacter::ResetInvincibleTimer, InvincibleTime, true);
+
+	Health -= Damage;
+	if (Health <= 0) {
+		//End Game
+	}
+}
+
+void ADiggerCharacter::ResetInvincibleTimer() {
+	IsInvincible = false;
+	GetWorldTimerManager().ClearTimer(InvincibleTimerHandle);
+}
+
+void ADiggerCharacter::FlickerSprite() {
+
 }

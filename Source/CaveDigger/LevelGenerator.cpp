@@ -3,6 +3,9 @@
 
 #include "LevelGenerator.h"
 #include "DirtParent.h"
+#include "Kismet/GameplayStatics.h"
+#include "CaveDiggerGameModeBase.h"
+
 
 
 // Sets default values
@@ -17,6 +20,11 @@ ALevelGenerator::ALevelGenerator()
 void ALevelGenerator::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (auto GameMode = Cast<ACaveDiggerGameModeBase>(UGameplayStatics::GetGameMode(this))) {
+		MaxGemValue = GameMode->GetRequiredScore() * 1.5;
+	}
+
 	SpawnWalls();
 	GenerateLevel();
 }

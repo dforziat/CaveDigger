@@ -30,6 +30,9 @@ public:
 	UFUNCTION()
 	void OnActorOverlap(AActor* OverlappedActor, AActor* OtherActor);
 
+	UFUNCTION()
+	void RecieveDamage(int32 Damage);
+
 private:
 	UPROPERTY(EditDefaultsOnly)
 	class UInputMappingContext* InputMapping;
@@ -90,7 +93,12 @@ private:
 	FString State = IDLE_STATE;
 	FTimerHandle AttackTimerHandle;
 	FTimerHandle DigTimerHandle;
+	FTimerHandle InvincibleTimerHandle;
 	float AttackDistOffset = 80;
+	int32 Health = 2;
+	int32 MaxHealth = 2;
+	bool IsInvincible = false;
+	float InvincibleTime = 1.5;
 
 
 	void MoveRight(const FInputActionInstance& Instance);
@@ -102,5 +110,6 @@ private:
 	void CheckSpriteJump();
 	void ResetAttackTimer();
 	void ResetDigTimer();
-
+	void ResetInvincibleTimer();
+	void FlickerSprite();
 };

@@ -20,8 +20,13 @@ public:
 	
 	float GetScore();
 
+	float GetRequiredScore();
+
 private:
 	UPROPERTY(EditAnywhere)
 	float Score = 0;
+
+	UPROPERTY(EditAnywhere)
+	float RequiredScore = 1000;
 	
 };

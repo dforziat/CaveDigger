@@ -38,11 +38,13 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	float IncrementDistance = 100;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditAnywhere)
 	int32 MaxRows = 50;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditAnywhere)
 	int32 MaxColumns = 10;
+
+	float MaxGemValue;
 
 	FString LastPlacedObject = "Dirt";
 
