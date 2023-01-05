@@ -2,7 +2,6 @@
 
 
 #include "GemParent.h"
-#include "PaperSpriteComponent.h"
 #include "Components/BoxComponent.h"
 #include "PaperFlipbookComponent.h"
 #include "Components/PointLightComponent.h"

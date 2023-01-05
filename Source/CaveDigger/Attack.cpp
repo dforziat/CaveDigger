@@ -7,6 +7,8 @@
 #include "PaperFlipbook.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "DirtParent.h"
+#include "EnemyCharacterParent.h"
+
 
 
 // Sets default values
@@ -44,6 +46,10 @@ void AAttack::OnActorOverlap(AActor* OverlappedActor, AActor* OtherActor) {
 	if (OtherActor->ActorHasTag("Dirt")) {
 		auto Dirt = Cast<ADirtParent>(OtherActor);
 		Dirt->TakeDigDamage();
+	}
+	else if (OtherActor->ActorHasTag("Enemy")) {
+		auto Enemy = Cast<AEnemyCharacterParent>(OtherActor);
+		Enemy->RecieveDamage(Damage);
 	}
 	Destroy();
 }

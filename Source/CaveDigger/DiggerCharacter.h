@@ -31,7 +31,14 @@ public:
 	void OnActorOverlap(AActor* OverlappedActor, AActor* OtherActor);
 
 	UFUNCTION()
-	void RecieveDamage(int32 Damage);
+	void RecieveDamage(int32 Damage, FVector DamageLocation);
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void FlickerSprite();
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	class UPaperFlipbookComponent* FlipbookComp;
+
 
 private:
 	UPROPERTY(EditDefaultsOnly)
@@ -51,9 +58,6 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	class UCameraComponent* Camera;
-
-	UPROPERTY(EditDefaultsOnly)
-	class UPaperFlipbookComponent* FlipbookComp;
 
 	UPROPERTY(EditDefaultsOnly)
 	class USpotLightComponent* SpotLight;
@@ -98,7 +102,7 @@ private:
 	int32 Health = 2;
 	int32 MaxHealth = 2;
 	bool IsInvincible = false;
-	float InvincibleTime = 1.5;
+	float InvincibleTime = 2;
 
 
 	void MoveRight(const FInputActionInstance& Instance);
@@ -111,5 +115,4 @@ private:
 	void ResetAttackTimer();
 	void ResetDigTimer();
 	void ResetInvincibleTimer();
-	void FlickerSprite();
 };

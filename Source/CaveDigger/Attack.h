@@ -39,6 +39,7 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	float AttackTimer = 2;
 
+	int32 Damage = 1;
 	FTimerHandle DestructionTimerHandle;
 
 	void DestroySelf();

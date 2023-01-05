@@ -51,9 +51,6 @@ void ADiggerCharacter::Tick(float DeltaTime)
 	CheckSpriteRotation();
 	CheckSpriteJump();
 
-	if (IsInvincible) {
-		FlickerSprite();
-	}
 }
 
 // Called to bind functionality to input
@@ -191,18 +188,27 @@ void ADiggerCharacter::OnActorOverlap(AActor* OverlappedActor, AActor* OtherActo
 		Gem->Destroy();
 	}
 	else if (OtherActor->ActorHasTag("Enemy")) {
-		RecieveDamage(1);
+		//DrawDebugPoint(GetWorld(), LaunchForce, 100, FColor::Red, true);
+		RecieveDamage(1, OtherActor->GetActorLocation());
 	}
 }
 
 
 
-void ADiggerCharacter::RecieveDamage(int32 Damage) {
+void ADiggerCharacter::RecieveDamage(int32 Damage, FVector DamageLocation) {
 	if (IsInvincible) return;
 	UE_LOG(LogTemp, Warning, TEXT("Took Damage from Enemy!"));
 	//Manage Invincible stuff
 	IsInvincible = true;
 	GetWorldTimerManager().SetTimer(InvincibleTimerHandle, this, &ADiggerCharacter::ResetInvincibleTimer, InvincibleTime, true);
+
+	//Knockback
+	FVector LaunchVector = DamageLocation + GetActorLocation();
+	FVector LaunchForce = LaunchVector * .08;
+	LaunchCharacter(LaunchForce, true, true);
+
+	FlickerSprite();
+
 
 	Health -= Damage;
 	if (Health <= 0) {
@@ -213,8 +219,4 @@ void ADiggerCharacter::RecieveDamage(int32 Damage) {
 void ADiggerCharacter::ResetInvincibleTimer() {
 	IsInvincible = false;
 	GetWorldTimerManager().ClearTimer(InvincibleTimerHandle);
-}
-
-void ADiggerCharacter::FlickerSprite() {
-
 }
