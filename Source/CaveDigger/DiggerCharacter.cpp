@@ -187,7 +187,7 @@ void ADiggerCharacter::OnActorOverlap(AActor* OverlappedActor, AActor* OtherActo
 		//Play Pickup sound
 		Gem->Destroy();
 	}
-	else if (OtherActor->ActorHasTag("Enemy")) {
+	else if (OtherActor->ActorHasTag("Enemy") || OtherActor->ActorHasTag("Hazard")) {
 		//DrawDebugPoint(GetWorld(), LaunchForce, 100, FColor::Red, true);
 		RecieveDamage(1, OtherActor->GetActorLocation());
 	}
@@ -213,6 +213,9 @@ void ADiggerCharacter::RecieveDamage(int32 Damage, FVector DamageLocation) {
 	Health -= Damage;
 	if (Health <= 0) {
 		//End Game
+		// FlipbookComp->SetFlipbook(DeathFlipbook);
+		//DisableInput(UGameplayStatics::GetPlayerController(this, 0));
+		//GameMode->GameOver();
 	}
 }
 
