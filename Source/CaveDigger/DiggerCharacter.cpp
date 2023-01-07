@@ -196,7 +196,7 @@ void ADiggerCharacter::OnActorOverlap(AActor* OverlappedActor, AActor* OtherActo
 
 
 void ADiggerCharacter::RecieveDamage(int32 Damage, FVector DamageLocation) {
-	if (IsInvincible) return;
+	if (IsInvincible || State.Equals(DEATH_STATE)) return;
 	UE_LOG(LogTemp, Warning, TEXT("Took Damage from Enemy!"));
 	//Manage Invincible stuff
 	IsInvincible = true;
@@ -231,4 +231,10 @@ int ADiggerCharacter::GetMaxHealth() {
 
 int ADiggerCharacter::GetCurrentHealth() {
 	return Health;
+}
+
+void ADiggerCharacter::GainHealth() {
+	if(Health < MaxHealth) {
+		Health++;
+	}
 }

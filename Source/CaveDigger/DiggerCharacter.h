@@ -45,6 +45,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	int GetCurrentHealth();
 
+	UFUNCTION(BlueprintCallable)
+	void GainHealth();
+
 private:
 	UPROPERTY(EditDefaultsOnly)
 	class UInputMappingContext* InputMapping;
