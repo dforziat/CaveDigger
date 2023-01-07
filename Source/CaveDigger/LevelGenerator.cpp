@@ -49,6 +49,8 @@ void ALevelGenerator::GenerateLevel() {
 		SpawnLocation = FVector(StartLocation.X, StartLocation.Y,(-RowIncrementer * IncrementDistance) + StartLocation.Z);
 		ColumnIncrementer = 0;
 	}
+		//SpawnExit
+		GetWorld()->SpawnActor<AActor>(ExitBlueprint, FVector(StartLocation.X, StartLocation.Y + ((MaxColumns - 1) * IncrementDistance), StartLocation.Z + (-MaxRows * IncrementDistance)), FRotator::ZeroRotator);
 }
 
 void ALevelGenerator::ChooseRandomObject() {
@@ -76,8 +78,7 @@ void ALevelGenerator::SpawnWalls() {
 	//Spawn Floor
 	int32 FloorIncrementer = 0;
 	while (FloorIncrementer < MaxColumns) {
-
-		//Floor
+		//Floor 
 		GetWorld()->SpawnActor<AActor>(WallBlueprint, FVector(StartLocation.X, StartLocation.Y + (IncrementDistance * FloorIncrementer), StartLocation.Z + (IncrementDistance * -MaxRows)), FRotator(0, 0, -90));
 		FloorIncrementer++;
 	}

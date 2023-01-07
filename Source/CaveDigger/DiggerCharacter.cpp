@@ -77,7 +77,7 @@ void ADiggerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 
 void ADiggerCharacter::MoveRight(const FInputActionInstance& Instance) {
-	if (State.Equals(ATTACK_STATE) || State.Equals(DIG_STATE)) return;
+	if (State.Equals(ATTACK_STATE) || State.Equals(DIG_STATE) || State.Equals(DEATH_STATE)) return;
 	float FloatValue = Instance.GetValue().Get<float>();
 	AddMovementInput(GetActorRightVector() * FloatValue);
 	if (FloatValue > 0) {
@@ -93,7 +93,7 @@ void ADiggerCharacter::MoveRight(const FInputActionInstance& Instance) {
 }
 
 void ADiggerCharacter::Attack(const FInputActionInstance& Instance) {
-	if (State.Equals(ATTACK_STATE) || State.Equals(JUMP_STATE) || State.Equals(DIG_STATE)) return;
+	if (State.Equals(ATTACK_STATE) || State.Equals(JUMP_STATE) || State.Equals(DIG_STATE) || State.Equals(DEATH_STATE)) return;
 
 		TArray<AActor*> AttackArray;
 		UGameplayStatics::GetAllActorsWithTag(this, TEXT("Attack"), AttackArray);
@@ -115,7 +115,7 @@ void ADiggerCharacter::Attack(const FInputActionInstance& Instance) {
 }
 
 void ADiggerCharacter::Dig(const FInputActionInstance& Instance) {
-	if (State.Equals(ATTACK_STATE) || State.Equals(JUMP_STATE) || State.Equals(DIG_STATE)) return;
+	if (State.Equals(ATTACK_STATE) || State.Equals(JUMP_STATE) || State.Equals(DIG_STATE) || State.Equals(DEATH_STATE)) return;
 	State = DIG_STATE;
 	FlipbookComp->SetFlipbook(DigFlipbook);
 	GetWorldTimerManager().SetTimer(DigTimerHandle, this, &ADiggerCharacter::ResetDigTimer, DigFlipbook->GetTotalDuration(), true);
@@ -135,7 +135,7 @@ void ADiggerCharacter::Dig(const FInputActionInstance& Instance) {
 }
 
 void ADiggerCharacter::CheckSpriteRotation() {
-	if (State.Equals(ATTACK_STATE) || State.Equals(DIG_STATE)) return;
+	if (State.Equals(ATTACK_STATE) || State.Equals(DIG_STATE) || State.Equals(DEATH_STATE)) return;
 	if (GetVelocity().Length() <= 0) {
 		FlipbookComp->SetFlipbook(IdleFlipbook);
 		State = IDLE_STATE;
@@ -147,7 +147,7 @@ void ADiggerCharacter::CheckSpriteRotation() {
 }
 
 void ADiggerCharacter::CheckSpriteJump() {
-	if(State.Equals(ATTACK_STATE) || State.Equals(DIG_STATE)) return;
+	if(State.Equals(ATTACK_STATE) || State.Equals(DIG_STATE) || State.Equals(DEATH_STATE)) return;
 	bool onGround = GetCharacterMovement()->IsMovingOnGround();
 
 	if (!onGround) {
@@ -213,8 +213,9 @@ void ADiggerCharacter::RecieveDamage(int32 Damage, FVector DamageLocation) {
 	Health -= Damage;
 	if (Health <= 0) {
 		//End Game
-		// FlipbookComp->SetFlipbook(DeathFlipbook);
-		//DisableInput(UGameplayStatics::GetPlayerController(this, 0));
+		State = DEATH_STATE;
+		FlipbookComp->SetFlipbook(DeadFlipbook);
+		DisableInput(UGameplayStatics::GetPlayerController(this, 0));
 		//GameMode->GameOver();
 	}
 }
@@ -222,4 +223,12 @@ void ADiggerCharacter::RecieveDamage(int32 Damage, FVector DamageLocation) {
 void ADiggerCharacter::ResetInvincibleTimer() {
 	IsInvincible = false;
 	GetWorldTimerManager().ClearTimer(InvincibleTimerHandle);
+}
+
+int ADiggerCharacter::GetMaxHealth() {
+	return MaxHealth;
+}
+
+int ADiggerCharacter::GetCurrentHealth() {
+	return Health;
 }

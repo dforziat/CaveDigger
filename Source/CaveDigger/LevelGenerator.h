@@ -32,6 +32,9 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	UClass* WallCornerBlueprint;
 
+	UPROPERTY(EditDefaultsOnly)
+	UClass* ExitBlueprint;
+
 	UPROPERTY(EditAnywhere)
 	FVector StartLocation;
 

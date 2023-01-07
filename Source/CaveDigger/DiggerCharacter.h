@@ -39,6 +39,11 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	class UPaperFlipbookComponent* FlipbookComp;
 
+	UFUNCTION(BlueprintCallable)
+	int GetMaxHealth();
+
+	UFUNCTION(BlueprintCallable)
+	int GetCurrentHealth();
 
 private:
 	UPROPERTY(EditDefaultsOnly)
@@ -86,6 +91,8 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Flipbooks")
 	UPaperFlipbook* DigFlipbook;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Flipbooks")
+	UPaperFlipbook* DeadFlipbook;
 
 
 	const FString IDLE_STATE = "Idle";
@@ -93,14 +100,16 @@ private:
 	const FString JUMP_STATE = "Jump";
 	const FString ATTACK_STATE = "Attack";
 	const FString DIG_STATE = "Dig";
+	const FString DEATH_STATE = "Death";
+
 
 	FString State = IDLE_STATE;
 	FTimerHandle AttackTimerHandle;
 	FTimerHandle DigTimerHandle;
 	FTimerHandle InvincibleTimerHandle;
 	float AttackDistOffset = 80;
-	int32 Health = 2;
-	int32 MaxHealth = 2;
+	int Health = 2;
+	int MaxHealth = 2;
 	bool IsInvincible = false;
 	float InvincibleTime = 2;
 
