@@ -2,7 +2,6 @@
 
 
 #include "LevelGenerator.h"
-#include "DirtParent.h"
 #include "Kismet/GameplayStatics.h"
 #include "CaveDiggerGameModeBase.h"
 
@@ -38,10 +37,7 @@ void ALevelGenerator::GenerateLevel() {
 
 	while (RowIncrementer < MaxRows) {
 		while (ColumnIncrementer < MaxColumns) {
-			//Spawn Dirt
-			ChooseRandomObject();
-			auto Dirt = GetWorld()->SpawnActor<ADirtParent>(DirtBlueprint, SpawnLocation, FRotator::ZeroRotator);
-			LastPlacedObject = TEXT("Dirt");
+			ChooseRandomObject(SpawnLocation);
 			SpawnLocation += FVector(0, IncrementDistance, 0);
 			ColumnIncrementer++;
 		}
@@ -53,8 +49,42 @@ void ALevelGenerator::GenerateLevel() {
 		GetWorld()->SpawnActor<AActor>(ExitBlueprint, FVector(StartLocation.X, StartLocation.Y + ((MaxColumns - 1) * IncrementDistance), StartLocation.Z + (-MaxRows * IncrementDistance)), FRotator::ZeroRotator);
 }
 
-void ALevelGenerator::ChooseRandomObject() {
-	//Decide which item/object/enemy to place into the level. 
+void ALevelGenerator::ChooseRandomObject(FVector SpawnLocation) {
+
+	//force spawn of hole after enemy to provide movement room
+	if (LastPlacedObject.Equals(TEXT("Enemy"))) {
+		LastPlacedObject = TEXT("Hole");
+		return;
+	}
+
+
+	int RandomNum = FMath::RandRange(1, 30);
+	switch (RandomNum) {
+	//spawn enemies
+		case 1:
+			GetWorld()->SpawnActor<AActor>(GrubBlueprint, SpawnLocation, FRotator::ZeroRotator);
+			LastPlacedObject = TEXT("Enemy");
+			break;
+	//spawn hazards
+		case 2:
+			GetWorld()->SpawnActor<AActor>(SpikeBlueprint, SpawnLocation, FRotator::ZeroRotator);
+			LastPlacedObject = TEXT("Hazard");
+			break;
+	//spawn Gems
+		case 3:
+			GetWorld()->SpawnActor<AActor>(ChooseGem(), SpawnLocation, FRotator::ZeroRotator);
+			LastPlacedObject = TEXT("Gem");
+			break;
+	//spawn hole
+		case 4:
+			LastPlacedObject = TEXT("Hole");
+			break;
+	//spawn dirt as default
+		default:
+			GetWorld()->SpawnActor<AActor>(DirtBlueprint, SpawnLocation, FRotator::ZeroRotator);
+			LastPlacedObject = TEXT("Dirt");
+			break;
+	}
 }
 
 void ALevelGenerator::SpawnWalls() {
@@ -81,6 +111,24 @@ void ALevelGenerator::SpawnWalls() {
 		//Floor 
 		GetWorld()->SpawnActor<AActor>(WallBlueprint, FVector(StartLocation.X, StartLocation.Y + (IncrementDistance * FloorIncrementer), StartLocation.Z + (IncrementDistance * -MaxRows)), FRotator(0, 0, -90));
 		FloorIncrementer++;
+	}
+}
+
+UClass* ALevelGenerator::ChooseGem() {
+	int RandomNum = FMath::RandRange(1, 3);
+	switch (RandomNum) {
+		case 1:
+			return EmeraldDirtBlueprint;
+			break;
+		case 2:
+			return RubyDirtBlueprint;
+			break;
+		case 3:
+			return SapphireDirtBlueprint;
+			break;
+		default:
+			return EmeraldDirtBlueprint;
+			break;
 	}
 }
 

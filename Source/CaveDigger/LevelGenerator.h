@@ -23,19 +23,31 @@ public:
 
 private:
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "Dirt Blueprints")
 	UClass* DirtBlueprint;
-
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "Dirt Blueprints")
 	UClass* WallBlueprint;
-
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, Category = "Dirt Blueprints")
 	UClass* WallCornerBlueprint;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Gem Blueprints")
+	UClass* EmeraldDirtBlueprint;
+	UPROPERTY(EditDefaultsOnly, Category = "Gem Blueprints")
+	UClass* RubyDirtBlueprint;
+	UPROPERTY(EditDefaultsOnly, Category = "Gem Blueprints")
+	UClass* SapphireDirtBlueprint;
+
+
+	UPROPERTY(EditDefaultsOnly, Category = "Enemy Blueprints")
+	UClass* GrubBlueprint;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Hazard Blueprints")
+	UClass* SpikeBlueprint;
 
 	UPROPERTY(EditDefaultsOnly)
 	UClass* ExitBlueprint;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	FVector StartLocation;
 
 	UPROPERTY(EditDefaultsOnly)
@@ -54,5 +66,6 @@ private:
 
 	void GenerateLevel();
 	void SpawnWalls();
-	void ChooseRandomObject();
+	void ChooseRandomObject(FVector SpawnLocation);
+	UClass* ChooseGem();
 };

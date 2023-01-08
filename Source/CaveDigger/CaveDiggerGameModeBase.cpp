@@ -1,6 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 
+#include "Kismet/GameplayStatics.h"
 #include "CaveDiggerGameModeBase.h"
 
 void ACaveDiggerGameModeBase::BeginPlay() {
@@ -30,5 +31,11 @@ void ACaveDiggerGameModeBase::GameOver() {
 
 	GetWorldTimerManager().ClearTimer(GameTimerHandle);
 
+}
+
+void ACaveDiggerGameModeBase::GameWin() {
+	GetWorldTimerManager().ClearTimer(GameTimerHandle);
+	//Show UI for upgrades
+	UGameplayStatics::OpenLevel(this, TEXT("Level"));
 }
 

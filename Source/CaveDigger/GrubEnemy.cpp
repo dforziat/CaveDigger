@@ -13,6 +13,11 @@ AGrubEnemy::AGrubEnemy() {
 void AGrubEnemy::BeginPlay()
 {
 	Super::BeginPlay();
+	int randomNum = FMath::RandRange(1,2);
+	if (randomNum == 2) {
+		MoveSpeed = MoveSpeed * -1;
+	}
+	MoveSpeed += randomNum / 10;
 }
 
 // Called every frame
