@@ -18,6 +18,8 @@
 #include "DirtParent.h"
 #include "GemParent.h"
 #include "CaveDiggerGameModeBase.h"
+#include "CaveDiggerGameInstance.h"
+
 
 
 // Sets default values
@@ -35,6 +37,7 @@ ADiggerCharacter::ADiggerCharacter()
 	SpotLight->SetupAttachment(FlipbookComp);
 	PointLight = CreateDefaultSubobject<UPointLightComponent>(TEXT("Point Light"));
 	PointLight->SetupAttachment(RootComponent);
+	
 }
 
 // Called when the game starts or when spawned
@@ -42,6 +45,8 @@ void ADiggerCharacter::BeginPlay()
 {
 	Super::BeginPlay();	
 	OnActorBeginOverlap.AddDynamic(this, &ADiggerCharacter::OnActorOverlap);
+
+	InitUpgrades();
 }
 
 // Called every frame
@@ -237,4 +242,12 @@ void ADiggerCharacter::GainHealth() {
 	if(Health < MaxHealth) {
 		Health++;
 	}
+}
+
+void ADiggerCharacter::InitUpgrades() {
+	GameInstance = Cast<UCaveDiggerGameInstance>(GetGameInstance());
+	MaxHealth += GameInstance->GetHealthUpgrades();
+	Health = MaxHealth;
+
+	PointLight->AttenuationRadius += (GameInstance->GetHelmetUpgrades() * 50);
 }

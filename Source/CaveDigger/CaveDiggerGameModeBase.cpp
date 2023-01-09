@@ -1,12 +1,17 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 
-#include "Kismet/GameplayStatics.h"
 #include "CaveDiggerGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
+#include "CaveDiggerGameInstance.h"
+
+
 
 void ACaveDiggerGameModeBase::BeginPlay() {
 	Super::BeginPlay();
-
+	//Setup Upgrades
+	GameInstance = Cast<UCaveDiggerGameInstance>(GetGameInstance());
+	GameTime += (GameInstance->GetTimeUpgrades() * 20);
 	//Start Timer
 	GetWorldTimerManager().SetTimer(GameTimerHandle, this, &ACaveDiggerGameModeBase::GameOver, GameTime, true);
 }

@@ -110,6 +110,7 @@ private:
 	FTimerHandle AttackTimerHandle;
 	FTimerHandle DigTimerHandle;
 	FTimerHandle InvincibleTimerHandle;
+	class UCaveDiggerGameInstance* GameInstance;
 	float AttackDistOffset = 80;
 	int Health = 2;
 	int MaxHealth = 2;
@@ -127,4 +128,6 @@ private:
 	void ResetAttackTimer();
 	void ResetDigTimer();
 	void ResetInvincibleTimer();
+
+	void InitUpgrades();
 };

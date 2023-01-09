@@ -8,6 +8,8 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "DirtParent.h"
 #include "EnemyCharacterParent.h"
+#include "CaveDiggerGameInstance.h"
+
 
 
 
@@ -27,8 +29,12 @@ AAttack::AAttack()
 void AAttack::BeginPlay()
 {
 	Super::BeginPlay();
-	GetWorldTimerManager().SetTimer(DestructionTimerHandle, this, &AAttack::DestroySelf, FlipbookComp->GetFlipbook()->GetTotalDuration(), true);
+
+	auto GameInstance = Cast<UCaveDiggerGameInstance>(GetGameInstance());
+	float AttackDuration = FlipbookComp->GetFlipbook()->GetTotalDuration() + (GameInstance->GetAttackRangeUpgrades() * .1);
+	GetWorldTimerManager().SetTimer(DestructionTimerHandle, this, &AAttack::DestroySelf, AttackDuration, true);
 	OnActorBeginOverlap.AddDynamic(this, &AAttack::OnActorOverlap);
+
 }
 
 // Called every frame

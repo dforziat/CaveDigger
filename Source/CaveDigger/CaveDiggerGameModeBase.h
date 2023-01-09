@@ -49,5 +49,7 @@ private:
 	int GameTime = 120;
 
 	FTimerHandle GameTimerHandle;
+
+	class UCaveDiggerGameInstance* GameInstance;
 	
 };
