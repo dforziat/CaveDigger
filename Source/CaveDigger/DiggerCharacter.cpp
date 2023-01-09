@@ -204,7 +204,7 @@ void ADiggerCharacter::RecieveDamage(int32 Damage, FVector DamageLocation) {
 
 	//Knockback
 	FVector LaunchVector = DamageLocation + GetActorLocation();
-	FVector LaunchForce = LaunchVector * .08;
+	FVector LaunchForce = LaunchVector.GetSafeNormal() * 300;
 	LaunchCharacter(LaunchForce, true, true);
 
 	FlickerSprite();
