@@ -52,10 +52,12 @@ void AAttack::OnActorOverlap(AActor* OverlappedActor, AActor* OtherActor) {
 	if (OtherActor->ActorHasTag("Dirt")) {
 		auto Dirt = Cast<ADirtParent>(OtherActor);
 		Dirt->TakeDigDamage();
+		Destroy();
 	}
 	else if (OtherActor->ActorHasTag("Enemy")) {
 		auto Enemy = Cast<AEnemyCharacterParent>(OtherActor);
 		Enemy->RecieveDamage(Damage);
+		Destroy();
 	}
-	Destroy();
+	
 }

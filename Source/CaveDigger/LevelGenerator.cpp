@@ -32,7 +32,14 @@ void ALevelGenerator::GenerateLevel() {
 
 	while (RowIncrementer < MaxRows) {
 		while (ColumnIncrementer < MaxColumns) {
-			ChooseRandomObject(SpawnLocation);
+			//Make the final Row only dirt to prevent hazards stopping player from finishing
+			if (RowIncrementer == MaxRows - 1) {
+				GetWorld()->SpawnActor<AActor>(DirtBlueprint, SpawnLocation, FRotator::ZeroRotator);
+				LastPlacedObject = TEXT("Dirt");
+			}
+			else {
+				ChooseRandomObject(SpawnLocation);
+			}
 			SpawnLocation += FVector(0, IncrementDistance, 0);
 			ColumnIncrementer++;
 		}

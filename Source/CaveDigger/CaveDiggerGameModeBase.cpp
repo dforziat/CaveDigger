@@ -12,25 +12,29 @@ void ACaveDiggerGameModeBase::BeginPlay() {
 	//Setup Upgrades
 	GameInstance = Cast<UCaveDiggerGameInstance>(GetGameInstance());
 	GameTime += (GameInstance->GetTimeUpgrades() * 20);
+}
+	
+
+void ACaveDiggerGameModeBase::StartGameTimer() {
 	//Start Timer
 	GetWorldTimerManager().SetTimer(GameTimerHandle, this, &ACaveDiggerGameModeBase::GameOver, GameTime, true);
 }
-
-
 
 int ACaveDiggerGameModeBase::GetGameTimeRemaing() {
 	return (int)GetWorldTimerManager().GetTimerRemaining(GameTimerHandle);
 }
 
 void ACaveDiggerGameModeBase::GameOver() {
-
 	GetWorldTimerManager().ClearTimer(GameTimerHandle);
+	GameInstance->SetMineLevel(1);
+	//Display Game Over screen.
 
 }
 
 void ACaveDiggerGameModeBase::GameWin() {
-	GetWorldTimerManager().ClearTimer(GameTimerHandle);
 	//Show UI for upgrades
-	UGameplayStatics::OpenLevel(this, TEXT("Level"));
+	GetWorldTimerManager().PauseTimer(GameTimerHandle);
+	GameInstance->IncreaseMineLevel();
+	UGameplayStatics::OpenLevel(this, TEXT("UpgradeLevel"));
 }
 

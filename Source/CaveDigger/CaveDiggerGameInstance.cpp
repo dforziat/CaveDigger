@@ -58,3 +58,15 @@ int UCaveDiggerGameInstance::GetTotalPlayerGems() {
 void UCaveDiggerGameInstance::AddGems(int Gems) {
 	TotalPlayerGems += Gems;
 }
+
+int UCaveDiggerGameInstance::GetMineLevel() {
+	return MineLevel;
+}
+
+void UCaveDiggerGameInstance::IncreaseMineLevel() {
+	MineLevel++;
+}
+
+void UCaveDiggerGameInstance::SetMineLevel(int NewMineLevel) {
+	MineLevel = NewMineLevel;
+}

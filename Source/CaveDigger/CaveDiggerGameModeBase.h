@@ -21,6 +21,10 @@ public:
 	int GetGameTimeRemaing();
 
 	UFUNCTION(BlueprintCallable)
+    void StartGameTimer();
+
+
+	UFUNCTION(BlueprintCallable)
 	void GameOver();
 
 	UFUNCTION(BlueprintCallable)
