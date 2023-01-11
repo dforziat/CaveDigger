@@ -54,3 +54,7 @@ void UCaveDiggerGameInstance::SetTotalPlayerGems(int Gems) {
 int UCaveDiggerGameInstance::GetTotalPlayerGems() {
 	return TotalPlayerGems;
 }
+
+void UCaveDiggerGameInstance::AddGems(int Gems) {
+	TotalPlayerGems += Gems;
+}

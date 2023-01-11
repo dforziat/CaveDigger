@@ -15,11 +15,6 @@ class CAVEDIGGER_API ACaveDiggerGameModeBase : public AGameModeBase
 	GENERATED_BODY()
 
 public:
-	void AddScore(float Value);
-	
-	UFUNCTION(BlueprintCallable)
-	float GetScore();
-
 	float GetRequiredScore();
 
 	UFUNCTION(BlueprintCallable)
@@ -32,18 +27,11 @@ public:
 	void GameWin();
 
 
-
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 private:
-	UPROPERTY(EditAnywhere)
-	float Score = 0;
-
-	UPROPERTY(EditAnywhere)
-	float RequiredScore = 1000;
 
 	UPROPERTY(EditAnywhere)
 	int GameTime = 120;

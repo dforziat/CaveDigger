@@ -185,9 +185,8 @@ void ADiggerCharacter::OnActorOverlap(AActor* OverlappedActor, AActor* OtherActo
 		UE_LOG(LogTemp, Warning, TEXT("Player On overlap with Gem"));
 		auto Gem = Cast<AGemParent>(OtherActor);
 		//Get GameMode and Add Gem Value to it. 
-		if (auto GameMode = Cast<ACaveDiggerGameModeBase>(UGameplayStatics::GetGameMode(this))) {
-			GameMode->AddScore(Gem->Value);
-			UE_LOG(LogTemp, Warning, TEXT("Player Score: %f"), GameMode->GetScore());
+		if (GameInstance != nullptr) {
+			GameInstance->AddGems(Gem->Value);
 		}
 		//Play Pickup sound
 		Gem->Destroy();

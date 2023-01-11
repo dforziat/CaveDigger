@@ -27,19 +27,19 @@ private:
 	int TimeUpgrades = 0;
 
 	//Player Stats
-	int TotalPlayerGems = 22;
+	int TotalPlayerGems = 1200;
 
 public:
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetHealthUpgrades();
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetHelmetUpgrades();
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetShovelUpgrades();
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetTimeUpgrades();
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetAttackRangeUpgrades();
 
 	UFUNCTION(BlueprintCallable)
@@ -53,9 +53,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void IncreaseAttackRangeUpgrades();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetTotalPlayerGems();
 	UFUNCTION(BlueprintCallable)
 	void SetTotalPlayerGems(int Gems);
+	UFUNCTION(BlueprintCallable)
+	void AddGems(int Gems);
+
 	
 };

@@ -16,17 +16,7 @@ void ACaveDiggerGameModeBase::BeginPlay() {
 	GetWorldTimerManager().SetTimer(GameTimerHandle, this, &ACaveDiggerGameModeBase::GameOver, GameTime, true);
 }
 
-void ACaveDiggerGameModeBase::AddScore(float Value) {
-	Score += Value;
-}
 
-float ACaveDiggerGameModeBase::GetScore() {
-	return Score;
-}
-
-float ACaveDiggerGameModeBase::GetRequiredScore() {
-	return RequiredScore;
-}
 
 int ACaveDiggerGameModeBase::GetGameTimeRemaing() {
 	return (int)GetWorldTimerManager().GetTimerRemaining(GameTimerHandle);
