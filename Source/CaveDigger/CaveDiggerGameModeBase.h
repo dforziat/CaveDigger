@@ -27,6 +27,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void GameOver();
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void DisplayGameOverScreen();
+
 	UFUNCTION(BlueprintCallable)
 	void GameWin();
 

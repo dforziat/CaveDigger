@@ -34,6 +34,9 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	UClass* GemBluePrint;
 
+	UPROPERTY(EditDefaultsOnly)
+	USoundBase* DigSound;
+
 
 	int32 DamageStage = 0;
 	int32 Health = 3;

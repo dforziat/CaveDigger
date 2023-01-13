@@ -2,6 +2,8 @@
 
 #include "DirtParent.h"
 #include "GemParent.h"
+#include "Kismet/GameplayStatics.h"
+
 
 
 // Sets default values
@@ -20,9 +22,9 @@ void ADirtParent::BeginPlay()
 	Super::BeginPlay();
 }
 
-
 void ADirtParent::TakeDigDamage() {
 	DamageStage += 1;
+	UGameplayStatics::PlaySoundAtLocation(this, DigSound, GetActorLocation(), 1.2F, 1 + (DamageStage / 10));
 	if(Health <= DamageStage) {
 		if (GemBluePrint != nullptr) {
 			GetWorld()->SpawnActor<AGemParent>(GemBluePrint, GetActorLocation(), GetActorRotation());

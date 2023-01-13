@@ -26,9 +26,9 @@ int ACaveDiggerGameModeBase::GetGameTimeRemaing() {
 
 void ACaveDiggerGameModeBase::GameOver() {
 	GetWorldTimerManager().ClearTimer(GameTimerHandle);
-	GameInstance->SetMineLevel(1);
+	GameInstance->ResetGameInstance();
 	//Display Game Over screen.
-
+	DisplayGameOverScreen();
 }
 
 void ACaveDiggerGameModeBase::GameWin() {

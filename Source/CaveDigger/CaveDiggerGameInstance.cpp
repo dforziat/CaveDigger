@@ -70,3 +70,15 @@ void UCaveDiggerGameInstance::IncreaseMineLevel() {
 void UCaveDiggerGameInstance::SetMineLevel(int NewMineLevel) {
 	MineLevel = NewMineLevel;
 }
+
+void UCaveDiggerGameInstance::ResetGameInstance() {
+	 HealthUpgrades = 0;
+	 HelmetUpgrades = 0;
+	 ShovelUpgrades = 0;
+	 AttackRangeUpgrades = 0;
+	 TimeUpgrades = 0;
+
+	//Player Stats
+	 TotalPlayerGems = 0;
+	 MineLevel = 1;
+}

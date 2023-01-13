@@ -27,7 +27,7 @@ private:
 	int TimeUpgrades = 0;
 
 	//Player Stats
-	int TotalPlayerGems = 1200;
+	int TotalPlayerGems = 0;
 	int MineLevel = 1;
 
 public:
@@ -67,5 +67,8 @@ public:
 	void IncreaseMineLevel();
 	UFUNCTION(BlueprintCallable)
 	void SetMineLevel(int NewMineLevel);
-	
+
+
+	UFUNCTION(BlueprintCallable)
+	void ResetGameInstance();
 };

@@ -47,6 +47,7 @@ void ADiggerCharacter::BeginPlay()
 	OnActorBeginOverlap.AddDynamic(this, &ADiggerCharacter::OnActorOverlap);
 
 	InitUpgrades();
+	
 }
 
 // Called every frame
@@ -220,7 +221,9 @@ void ADiggerCharacter::RecieveDamage(int32 Damage, FVector DamageLocation) {
 		State = DEATH_STATE;
 		FlipbookComp->SetFlipbook(DeadFlipbook);
 		DisableInput(UGameplayStatics::GetPlayerController(this, 0));
-		//GameMode->GameOver();
+		if (auto GameMode = Cast<ACaveDiggerGameModeBase>(UGameplayStatics::GetGameMode(this))) {
+			GameMode->GameOver();
+		}
 	}
 }
 
