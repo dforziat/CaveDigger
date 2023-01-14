@@ -97,6 +97,12 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Flipbooks")
 	UPaperFlipbook* DeadFlipbook;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Sound")
+	USoundBase* HurtSound;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Sound")
+	USoundBase* GemPickupSound;
+
 
 	const FString IDLE_STATE = "Idle";
 	const FString RUN_STATE = "Run";
@@ -112,8 +118,8 @@ private:
 	FTimerHandle InvincibleTimerHandle;
 	class UCaveDiggerGameInstance* GameInstance;
 	float AttackDistOffset = 80;
-	int Health = 2;
-	int MaxHealth = 2;
+	int Health = 3;
+	int MaxHealth = 3;
 	bool IsInvincible = false;
 	float InvincibleTime = 2;
 

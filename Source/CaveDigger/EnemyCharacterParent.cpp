@@ -4,6 +4,9 @@
 #include "EnemyCharacterParent.h"
 #include "PaperFlipbookComponent.h"
 #include "Components/PointLightComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "NiagaraFunctionLibrary.h"
+
 
 
 // Sets default values
@@ -31,6 +34,8 @@ void AEnemyCharacterParent::Tick(float DeltaTime)
 
 void AEnemyCharacterParent::RecieveDamage(int32 Damage) {
 	Health -= Damage;
+	UGameplayStatics::PlaySoundAtLocation(this, DamageSound, GetActorLocation());
+	UNiagaraFunctionLibrary::SpawnSystemAtLocation(this, BloodSystem, GetActorLocation());
 	if (Health <= 0) {
 		Destroy();
 	}

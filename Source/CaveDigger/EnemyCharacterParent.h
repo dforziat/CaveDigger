@@ -32,6 +32,12 @@ private:
 	UPROPERTY(EditAnywhere)
 	class UPointLightComponent* PointLight;
 
+	UPROPERTY(EditDefaultsOnly)
+	class USoundBase* DamageSound;
+
+	UPROPERTY(EditDefaultsOnly)
+	class UNiagaraSystem* BloodSystem;
+
 	int32 Health = 1;
 
 

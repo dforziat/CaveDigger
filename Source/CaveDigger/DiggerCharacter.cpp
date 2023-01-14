@@ -189,7 +189,7 @@ void ADiggerCharacter::OnActorOverlap(AActor* OverlappedActor, AActor* OtherActo
 		if (GameInstance != nullptr) {
 			GameInstance->AddGems(Gem->Value);
 		}
-		//Play Pickup sound
+		UGameplayStatics::PlaySoundAtLocation(this, GemPickupSound, GetActorLocation());
 		Gem->Destroy();
 	}
 	else if (OtherActor->ActorHasTag("Enemy") || OtherActor->ActorHasTag("Hazard")) {
@@ -203,6 +203,8 @@ void ADiggerCharacter::OnActorOverlap(AActor* OverlappedActor, AActor* OtherActo
 void ADiggerCharacter::RecieveDamage(int32 Damage, FVector DamageLocation) {
 	if (IsInvincible || State.Equals(DEATH_STATE)) return;
 	UE_LOG(LogTemp, Warning, TEXT("Took Damage from Enemy!"));
+
+	UGameplayStatics::PlaySoundAtLocation(this, HurtSound, GetActorLocation());
 	//Manage Invincible stuff
 	IsInvincible = true;
 	GetWorldTimerManager().SetTimer(InvincibleTimerHandle, this, &ADiggerCharacter::ResetInvincibleTimer, InvincibleTime, true);
