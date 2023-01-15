@@ -78,6 +78,7 @@ void ADiggerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	Input->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ACharacter::Jump);
 	Input->BindAction(AttackAction, ETriggerEvent::Triggered, this, &ADiggerCharacter::Attack);
 	Input->BindAction(DigAction, ETriggerEvent::Triggered, this, &ADiggerCharacter::Dig);
+	Input->BindAction(PauseAction, ETriggerEvent::Triggered, this, &ADiggerCharacter::PauseGame);
 
 }
 
@@ -252,6 +253,11 @@ void ADiggerCharacter::InitUpgrades() {
 	GameInstance = Cast<UCaveDiggerGameInstance>(GetGameInstance());
 	MaxHealth += GameInstance->GetHealthUpgrades();
 	Health = MaxHealth;
-
 	PointLight->AttenuationRadius += (GameInstance->GetHelmetUpgrades() * 50);
+}
+
+void ADiggerCharacter::PauseGame(const FInputActionInstance& Instance) {
+	if (auto GameMode = Cast<ACaveDiggerGameModeBase>(UGameplayStatics::GetGameMode(this))) {
+		GameMode->TogglePause();
+	}
 }

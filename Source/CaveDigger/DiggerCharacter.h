@@ -60,6 +60,8 @@ private:
 	UInputAction* AttackAction;
 	UPROPERTY(EditDefaultsOnly, Category = "Input Actions")
 	UInputAction* DigAction;
+	UPROPERTY(EditDefaultsOnly, Category = "Input Actions")
+	UInputAction* PauseAction;
 
 	UPROPERTY(EditDefaultsOnly)
 	class USpringArmComponent* SpringArm;
@@ -127,6 +129,7 @@ private:
 	void MoveRight(const FInputActionInstance& Instance);
 	void Attack(const FInputActionInstance& Instance);
 	void Dig(const FInputActionInstance& Instance);
+	void PauseGame(const FInputActionInstance& Instance);
 
 
 	void CheckSpriteRotation();

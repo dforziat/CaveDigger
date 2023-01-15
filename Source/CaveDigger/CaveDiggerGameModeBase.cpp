@@ -38,3 +38,15 @@ void ACaveDiggerGameModeBase::GameWin() {
 	UGameplayStatics::OpenLevel(this, TEXT("UpgradeLevel"));
 }
 
+void ACaveDiggerGameModeBase::TogglePause() {
+	if (GameIsPaused) {
+		GameIsPaused = false;
+		GetWorldTimerManager().UnPauseTimer(GameTimerHandle);
+	}
+	else {
+		GameIsPaused = true;
+		GetWorldTimerManager().PauseTimer(GameTimerHandle);
+	}
+	UGameplayStatics::SetGamePaused(this, GameIsPaused);
+}
+

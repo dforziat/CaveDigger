@@ -15,8 +15,6 @@ class CAVEDIGGER_API ACaveDiggerGameModeBase : public AGameModeBase
 	GENERATED_BODY()
 
 public:
-	float GetRequiredScore();
-
 	UFUNCTION(BlueprintCallable)
 	int GetGameTimeRemaing();
 
@@ -33,6 +31,11 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void GameWin();
 
+	UFUNCTION(BlueprintCallable)
+	void TogglePause();
+
+	UPROPERTY()
+	bool GameIsPaused = false;
 
 protected:
 	// Called when the game starts or when spawned
