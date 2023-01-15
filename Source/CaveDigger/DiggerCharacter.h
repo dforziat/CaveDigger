@@ -30,7 +30,7 @@ public:
 	UFUNCTION()
 	void OnActorOverlap(AActor* OverlappedActor, AActor* OtherActor);
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void RecieveDamage(int32 Damage, FVector DamageLocation);
 
 	UFUNCTION(BlueprintImplementableEvent)

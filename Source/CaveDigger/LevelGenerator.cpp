@@ -69,7 +69,7 @@ void ALevelGenerator::ChooseRandomObject(FVector SpawnLocation) {
 			break;
 	//spawn hazards
 		case 2:
-			GetWorld()->SpawnActor<AActor>(SpikeBlueprint, SpawnLocation, FRotator::ZeroRotator);
+			GetWorld()->SpawnActor<AActor>(ChooseHazard(), SpawnLocation, FRotator::ZeroRotator);
 			LastPlacedObject = TEXT("Hazard");
 			break;
 	//spawn Gems
@@ -131,6 +131,21 @@ UClass* ALevelGenerator::ChooseGem() {
 		default:
 			return EmeraldDirtBlueprint;
 			break;
+	}
+}
+
+UClass* ALevelGenerator::ChooseHazard() {
+	int RandomNum = FMath::RandRange(1, 2);
+	switch (RandomNum) {
+	case 1:
+		return SpikeBlueprint;
+		break;
+	case 2:
+		return BoulderBlueprint;
+		break;
+	default:
+		return SpikeBlueprint;
+		break;
 	}
 }
 

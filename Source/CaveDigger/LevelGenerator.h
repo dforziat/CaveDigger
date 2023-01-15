@@ -44,6 +44,9 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Hazard Blueprints")
 	UClass* SpikeBlueprint;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Hazard Blueprints")
+	UClass* BoulderBlueprint;
+
 	UPROPERTY(EditDefaultsOnly)
 	UClass* ExitBlueprint;
 
@@ -68,4 +71,5 @@ private:
 	void SpawnWalls();
 	void ChooseRandomObject(FVector SpawnLocation);
 	UClass* ChooseGem();
+	UClass* ChooseHazard();
 };
