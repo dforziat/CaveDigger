@@ -125,7 +125,6 @@ private:
 	bool IsInvincible = false;
 	float InvincibleTime = 2;
 
-
 	void MoveRight(const FInputActionInstance& Instance);
 	void Attack(const FInputActionInstance& Instance);
 	void Dig(const FInputActionInstance& Instance);

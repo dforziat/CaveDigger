@@ -42,11 +42,14 @@ void ACaveDiggerGameModeBase::TogglePause() {
 	if (GameIsPaused) {
 		GameIsPaused = false;
 		GetWorldTimerManager().UnPauseTimer(GameTimerHandle);
+		RemovePauseScreen();
 	}
 	else {
 		GameIsPaused = true;
 		GetWorldTimerManager().PauseTimer(GameTimerHandle);
+		DisplayPauseScreen();
 	}
+	UGameplayStatics::PlaySound2D(this, PauseSound);
 	UGameplayStatics::SetGamePaused(this, GameIsPaused);
 }
 

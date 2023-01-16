@@ -257,7 +257,9 @@ void ADiggerCharacter::InitUpgrades() {
 }
 
 void ADiggerCharacter::PauseGame(const FInputActionInstance& Instance) {
+	if (State.Equals(DEATH_STATE)) return;
 	if (auto GameMode = Cast<ACaveDiggerGameModeBase>(UGameplayStatics::GetGameMode(this))) {
+		UE_LOG(LogTemp, Warning, TEXT("Pause Pressed"));
 		GameMode->TogglePause();
 	}
 }

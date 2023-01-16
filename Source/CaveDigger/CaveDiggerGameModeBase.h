@@ -34,8 +34,16 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void TogglePause();
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void DisplayPauseScreen();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void RemovePauseScreen();
+
 	UPROPERTY()
 	bool GameIsPaused = false;
+
+
 
 protected:
 	// Called when the game starts or when spawned
@@ -45,9 +53,13 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	int GameTime = 120;
+	UPROPERTY(EditDefaultsOnly)
+	USoundBase* PauseSound;
 
 	FTimerHandle GameTimerHandle;
 
 	class UCaveDiggerGameInstance* GameInstance;
+
+
 	
 };
