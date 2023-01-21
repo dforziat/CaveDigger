@@ -25,6 +25,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void GameOver();
 
+
+	UFUNCTION(BlueprintCallable)
+	void TimeOver();
+
 	UFUNCTION(BlueprintImplementableEvent)
 	void DisplayGameOverScreen();
 
@@ -40,8 +44,11 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void RemovePauseScreen();
 
-	UPROPERTY()
+	UPROPERTY(BluePrintReadOnly)
 	bool GameIsPaused = false;
+
+	UPROPERTY(BluePrintReadOnly)
+	bool IsTimeOver = false;
 
 
 
@@ -59,6 +66,7 @@ private:
 	FTimerHandle GameTimerHandle;
 
 	class UCaveDiggerGameInstance* GameInstance;
+
 
 
 	

@@ -4,6 +4,8 @@
 #include "CaveDiggerGameModeBase.h"
 #include "Kismet/GameplayStatics.h"
 #include "CaveDiggerGameInstance.h"
+#include "DiggerCharacter.h"
+
 
 
 
@@ -51,5 +53,12 @@ void ACaveDiggerGameModeBase::TogglePause() {
 	}
 	UGameplayStatics::PlaySound2D(this, PauseSound);
 	UGameplayStatics::SetGamePaused(this, GameIsPaused);
+}
+
+void ACaveDiggerGameModeBase::TimeOver() {
+	IsTimeOver = true;
+	if (auto DiggerCharacter = Cast<ADiggerCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0))) {
+		DiggerCharacter->Die();
+	}
 }
 

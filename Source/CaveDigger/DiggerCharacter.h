@@ -48,6 +48,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void GainHealth();
 
+	UFUNCTION(BlueprintCallable)
+	void Die();
+
 private:
 	UPROPERTY(EditDefaultsOnly)
 	class UInputMappingContext* InputMapping;

@@ -220,14 +220,9 @@ void ADiggerCharacter::RecieveDamage(int32 Damage, FVector DamageLocation) {
 
 	Health -= Damage;
 	if (Health <= 0) {
-		//End Game
-		State = DEATH_STATE;
-		FlipbookComp->SetFlipbook(DeadFlipbook);
-		DisableInput(UGameplayStatics::GetPlayerController(this, 0));
-		if (auto GameMode = Cast<ACaveDiggerGameModeBase>(UGameplayStatics::GetGameMode(this))) {
-			GameMode->GameOver();
-		}
+		Die();
 	}
+		
 }
 
 void ADiggerCharacter::ResetInvincibleTimer() {
@@ -261,5 +256,15 @@ void ADiggerCharacter::PauseGame(const FInputActionInstance& Instance) {
 	if (auto GameMode = Cast<ACaveDiggerGameModeBase>(UGameplayStatics::GetGameMode(this))) {
 		UE_LOG(LogTemp, Warning, TEXT("Pause Pressed"));
 		GameMode->TogglePause();
+	}
+}
+
+void ADiggerCharacter::Die() {
+	//End Game
+	State = DEATH_STATE;
+	FlipbookComp->SetFlipbook(DeadFlipbook);
+	DisableInput(UGameplayStatics::GetPlayerController(this, 0));
+	if (auto GameMode = Cast<ACaveDiggerGameModeBase>(UGameplayStatics::GetGameMode(this))) {
+		GameMode->GameOver();
 	}
 }
