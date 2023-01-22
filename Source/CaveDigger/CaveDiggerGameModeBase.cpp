@@ -19,7 +19,7 @@ void ACaveDiggerGameModeBase::BeginPlay() {
 
 void ACaveDiggerGameModeBase::StartGameTimer() {
 	//Start Timer
-	GetWorldTimerManager().SetTimer(GameTimerHandle, this, &ACaveDiggerGameModeBase::GameOver, GameTime, true);
+	GetWorldTimerManager().SetTimer(GameTimerHandle, this, &ACaveDiggerGameModeBase::TimeOver, GameTime, true);
 }
 
 int ACaveDiggerGameModeBase::GetGameTimeRemaing() {

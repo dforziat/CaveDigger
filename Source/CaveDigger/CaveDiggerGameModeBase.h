@@ -59,7 +59,7 @@ protected:
 private:
 
 	UPROPERTY(EditAnywhere)
-	int GameTime = 120;
+	int GameTime = 30;
 	UPROPERTY(EditDefaultsOnly)
 	USoundBase* PauseSound;
 
