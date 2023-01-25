@@ -3,18 +3,21 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/GameModeBase.h"
+#include "GameFramework/GameMode.h"
 #include "CaveDiggerGameModeBase.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class CAVEDIGGER_API ACaveDiggerGameModeBase : public AGameModeBase
+class CAVEDIGGER_API ACaveDiggerGameModeBase : public AGameMode
 {
 	GENERATED_BODY()
 
 public:
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
 	UFUNCTION(BlueprintCallable)
 	int GetGameTimeRemaing();
 
@@ -50,6 +53,9 @@ public:
 	UPROPERTY(BluePrintReadOnly)
 	bool IsTimeOver = false;
 
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UCameraShakeBase> CameraShake;
+
 
 
 protected:
@@ -59,7 +65,10 @@ protected:
 private:
 
 	UPROPERTY(EditAnywhere)
-	int GameTime = 30;
+	int GameTime = 40;
+
+	bool IsCameraShaking = false;
+
 	UPROPERTY(EditDefaultsOnly)
 	USoundBase* PauseSound;
 
@@ -67,7 +76,6 @@ private:
 
 	class UCaveDiggerGameInstance* GameInstance;
 
+	class ADiggerCharacter* DiggerCharacter;
 
-
-	
 };

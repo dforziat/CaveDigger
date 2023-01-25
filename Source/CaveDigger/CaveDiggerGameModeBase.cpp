@@ -9,11 +9,24 @@
 
 
 
+
 void ACaveDiggerGameModeBase::BeginPlay() {
 	Super::BeginPlay();
+	PrimaryActorTick.bCanEverTick = true;
+	DiggerCharacter = Cast<ADiggerCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0));
 	//Setup Upgrades
 	GameInstance = Cast<UCaveDiggerGameInstance>(GetGameInstance());
 	GameTime += (GameInstance->GetTimeUpgrades() * 20);
+}
+
+void ACaveDiggerGameModeBase::Tick(float DeltaTime){
+	Super::Tick(DeltaTime);
+
+	//Rumble when time runs low
+	if (GetWorldTimerManager().GetTimerRemaining(GameTimerHandle) <= 30 && !IsCameraShaking && GetWorldTimerManager().GetTimerRemaining(GameTimerHandle) != -1){
+		IsCameraShaking = true;
+		UGameplayStatics::PlayWorldCameraShake(this, CameraShake, DiggerCharacter->GetActorLocation(), 1, 10000);
+	}
 }
 	
 
@@ -57,7 +70,7 @@ void ACaveDiggerGameModeBase::TogglePause() {
 
 void ACaveDiggerGameModeBase::TimeOver() {
 	IsTimeOver = true;
-	if (auto DiggerCharacter = Cast<ADiggerCharacter>(UGameplayStatics::GetPlayerCharacter(this, 0))) {
+	if (DiggerCharacter != nullptr) {
 		DiggerCharacter->Die();
 	}
 }
