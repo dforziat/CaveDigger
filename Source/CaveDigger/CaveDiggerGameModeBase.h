@@ -72,6 +72,9 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	USoundBase* PauseSound;
 
+	UPROPERTY(EditDefaultsOnly)
+	USoundBase* RumbleSound;
+
 	FTimerHandle GameTimerHandle;
 
 	class UCaveDiggerGameInstance* GameInstance;

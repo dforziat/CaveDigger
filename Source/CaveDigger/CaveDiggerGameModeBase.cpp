@@ -26,6 +26,7 @@ void ACaveDiggerGameModeBase::Tick(float DeltaTime){
 	if (GetWorldTimerManager().GetTimerRemaining(GameTimerHandle) <= 30 && !IsCameraShaking && GetWorldTimerManager().GetTimerRemaining(GameTimerHandle) != -1){
 		IsCameraShaking = true;
 		UGameplayStatics::PlayWorldCameraShake(this, CameraShake, DiggerCharacter->GetActorLocation(), 1, 10000);
+		UGameplayStatics::PlaySound2D(this, RumbleSound);
 	}
 }
 	
