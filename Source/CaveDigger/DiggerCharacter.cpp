@@ -19,7 +19,6 @@
 #include "GemParent.h"
 #include "CaveDiggerGameModeBase.h"
 #include "CaveDiggerGameInstance.h"
-#include "NiagaraFunctionLibrary.h"
 
 
 
@@ -136,8 +135,7 @@ void ADiggerCharacter::Dig(const FInputActionInstance& Instance) {
 	bool hit = GetWorld()->LineTraceSingleByChannel(HitResult, GetActorLocation(), GetActorLocation() + FVector(0,0,-100), ECollisionChannel::ECC_Pawn, QueryParams);
 	if (hit) {
 		if (HitResult.GetActor()->ActorHasTag(TEXT("Dirt"))) {
-			Cast<ADirtParent>(HitResult.GetActor())->TakeDigDamage();
-			UNiagaraFunctionLibrary::SpawnSystemAtLocation(this, DirtSystem,HitResult.ImpactPoint);
+			Cast<ADirtParent>(HitResult.GetActor())->TakeDigDamage(HitResult.ImpactPoint);
 		}
 	}
 	//DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + FVector(0, 0, -100), FColor::Red, true, 5);

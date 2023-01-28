@@ -21,7 +21,7 @@ protected:
 
 public:	
 	UFUNCTION(BlueprintCallable)
-	void TakeDigDamage();
+	void TakeDigDamage(FVector DamageLocation = FVector::ZeroVector);
 
 private:
 
@@ -36,6 +36,10 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	USoundBase* DigSound;
+
+
+	UPROPERTY(EditDefaultsOnly)
+	class UNiagaraSystem* DirtParticleSystem;
 
 
 	int32 DamageStage = 0;

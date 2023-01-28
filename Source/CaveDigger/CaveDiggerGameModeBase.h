@@ -65,7 +65,7 @@ protected:
 private:
 
 	UPROPERTY(EditAnywhere)
-	int GameTime = 40;
+	int GameTime = 120;
 
 	bool IsCameraShaking = false;
 

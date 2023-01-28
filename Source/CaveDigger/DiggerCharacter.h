@@ -108,9 +108,6 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Sound")
 	USoundBase* GemPickupSound;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Particles")
-	class UNiagaraSystem* DirtSystem;
-
 
 	const FString IDLE_STATE = "Idle";
 	const FString RUN_STATE = "Run";

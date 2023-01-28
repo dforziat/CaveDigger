@@ -51,7 +51,7 @@ void AAttack::OnActorOverlap(AActor* OverlappedActor, AActor* OtherActor) {
 	UE_LOG(LogTemp, Warning, TEXT("Attack Overlap Actor with %s"), *OtherActor->GetActorNameOrLabel());
 	if (OtherActor->ActorHasTag("Dirt")) {
 		auto Dirt = Cast<ADirtParent>(OtherActor);
-		Dirt->TakeDigDamage();
+		Dirt->TakeDigDamage(GetActorLocation());
 		Destroy();
 	}
 	else if (OtherActor->ActorHasTag("Enemy")) {

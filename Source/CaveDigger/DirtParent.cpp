@@ -3,6 +3,8 @@
 #include "DirtParent.h"
 #include "GemParent.h"
 #include "Kismet/GameplayStatics.h"
+#include "NiagaraFunctionLibrary.h"
+
 
 
 
@@ -22,7 +24,7 @@ void ADirtParent::BeginPlay()
 	Super::BeginPlay();
 }
 
-void ADirtParent::TakeDigDamage() {
+void ADirtParent::TakeDigDamage(FVector DamageLocation) {
 	DamageStage += 1;
 	UGameplayStatics::PlaySoundAtLocation(this, DigSound, GetActorLocation(), 1.2F, 1 + (DamageStage / 10));
 	if(Health <= DamageStage) {
@@ -33,6 +35,11 @@ void ADirtParent::TakeDigDamage() {
 		return;
 	}
 	StaticMeshComp->SetMaterial(0, MaterialList[DamageStage - 1]);
+
+	//Spawn Dirt Particle'
+	if (DamageLocation != FVector::ZeroVector) {
+		UNiagaraFunctionLibrary::SpawnSystemAtLocation(this, DirtParticleSystem, DamageLocation);
+	}
 }
 
 void ADirtParent::DropGem() {
