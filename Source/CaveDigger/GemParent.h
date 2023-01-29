@@ -37,4 +37,7 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	class UPointLightComponent* PointLight;
 
+	UPROPERTY(EditDefaultsOnly)
+	class UWidgetComponent* WidgetComp;
+
 };
