@@ -192,6 +192,7 @@ void ADiggerCharacter::OnActorOverlap(AActor* OverlappedActor, AActor* OtherActo
 			GameInstance->AddGems(Gem->Value);
 		}
 		UGameplayStatics::PlaySoundAtLocation(this, GemPickupSound, GetActorLocation());
+		//Gem stop collision, make invisible, and then play game increase animation
 		Gem->Destroy();
 	}
 	else if (OtherActor->ActorHasTag("Enemy") || OtherActor->ActorHasTag("Hazard")) {
