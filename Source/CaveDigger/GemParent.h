@@ -26,18 +26,23 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	float Value = 100;
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayIncreaseAnimation();
+
+	UFUNCTION(BlueprintCallable)
+	int GetValue();
+
 private: 
 
 	UPROPERTY(EditDefaultsOnly)
 	class UBoxComponent* BoxComp;
 
 	UPROPERTY(EditDefaultsOnly)
-	class UPaperFlipbookComponent* FlipbookComp;
-
-	UPROPERTY(EditDefaultsOnly)
 	class UPointLightComponent* PointLight;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
 	class UWidgetComponent* WidgetComp;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
+	class UPaperFlipbookComponent* FlipbookComp;
 };

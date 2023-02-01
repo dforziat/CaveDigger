@@ -39,4 +39,6 @@ void AGemParent::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-
+int AGemParent::GetValue() {
+	return Value;
+}
