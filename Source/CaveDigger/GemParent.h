@@ -34,7 +34,7 @@ public:
 
 private: 
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
 	class UBoxComponent* BoxComp;
 
 	UPROPERTY(EditDefaultsOnly)
