@@ -137,6 +137,9 @@ void ADiggerCharacter::Dig(const FInputActionInstance& Instance) {
 		if (HitResult.GetActor()->ActorHasTag(TEXT("Dirt"))) {
 			Cast<ADirtParent>(HitResult.GetActor())->TakeDigDamage(HitResult.ImpactPoint);
 		}
+		else {
+			UGameplayStatics::PlaySoundAtLocation(this, DigClinkSound, GetActorLocation());
+		}
 	}
 	//DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + FVector(0, 0, -100), FColor::Red, true, 5);
 
