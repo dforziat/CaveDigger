@@ -71,6 +71,13 @@ void UCaveDiggerGameInstance::SetMineLevel(int NewMineLevel) {
 	MineLevel = NewMineLevel;
 }
 
+int  UCaveDiggerGameInstance::GetTotalPlayerGold() {
+	return TotalPlayerGold;
+}
+void UCaveDiggerGameInstance::AddPlayerGold(int Gold) {
+	TotalPlayerGold = TotalPlayerGold + Gold;
+}
+
 void UCaveDiggerGameInstance::ResetGameInstance() {
 	 HealthUpgrades = 0;
 	 HelmetUpgrades = 0;

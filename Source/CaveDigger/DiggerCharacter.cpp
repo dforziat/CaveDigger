@@ -23,6 +23,7 @@
 
 
 
+
 // Sets default values
 ADiggerCharacter::ADiggerCharacter()
 {
@@ -120,6 +121,8 @@ void ADiggerCharacter::Attack(const FInputActionInstance& Instance) {
 			SpawnLocation.Y -= AttackDistOffset;
 		}
 		auto Projectile = GetWorld()->SpawnActor<AAttack>(AttackBlueprint, SpawnLocation, FlipbookComp->GetRelativeRotation());
+		UGameplayStatics::PlaySoundAtLocation(this, AttackSound, GetActorLocation());
+
 }
 
 void ADiggerCharacter::Dig(const FInputActionInstance& Instance) {

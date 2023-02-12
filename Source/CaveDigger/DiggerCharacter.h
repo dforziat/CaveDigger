@@ -111,6 +111,9 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Sound")
 	USoundBase* DigClinkSound;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Sound")
+	USoundBase* AttackSound;
+
 
 	const FString IDLE_STATE = "Idle";
 	const FString RUN_STATE = "Run";

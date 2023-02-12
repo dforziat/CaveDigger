@@ -29,6 +29,7 @@ private:
 	//Player Stats
 	int TotalPlayerGems = 0;
 	int MineLevel = 1;
+	int TotalPlayerGold = 0;
 
 public:
 
@@ -67,6 +68,12 @@ public:
 	void IncreaseMineLevel();
 	UFUNCTION(BlueprintCallable)
 	void SetMineLevel(int NewMineLevel);
+
+	UFUNCTION(BlueprintCallable)
+	void AddPlayerGold(int Gold);
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	int GetTotalPlayerGold();
+
 
 
 	UFUNCTION(BlueprintCallable)
