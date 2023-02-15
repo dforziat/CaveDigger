@@ -12,16 +12,14 @@ ADynamiteCrate::ADynamiteCrate()
 	PrimaryActorTick.bCanEverTick = true;
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	Mesh->SetupAttachment(RootComponent);
-
-	PointLight = CreateDefaultSubobject<UPointLightComponent>(TEXT("Point Light"));
-	PointLight->SetupAttachment(RootComponent);
-
 }
 
 // Called when the game starts or when spawned
 void ADynamiteCrate::BeginPlay()
 {
 	Super::BeginPlay();
+	Mesh->OnComponentHit.AddDynamic(this, &ADynamiteCrate::OnMeshHit);
+
 	
 }
 
@@ -30,5 +28,9 @@ void ADynamiteCrate::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void ADynamiteCrate::OnMeshHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) {
+	UE_LOG(LogTemp, Warning, TEXT("Dynamite ON HIT works!!!"));
 }
 
