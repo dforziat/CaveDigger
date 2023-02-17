@@ -32,5 +32,15 @@ void ADynamiteCrate::Tick(float DeltaTime)
 
 void ADynamiteCrate::OnMeshHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) {
 	UE_LOG(LogTemp, Warning, TEXT("Dynamite ON HIT works!!!"));
+	if (!HasBeenTouched &&(OtherActor->ActorHasTag(TEXT("Player")) || OtherActor->ActorHasTag(TEXT("Enemy")))) {
+		StartCountdown();
+		HasBeenTouched = true;
+	}
+}
+
+void ADynamiteCrate::Explode() {
+	//PlayExplosion SFX and VFX
+	//Do 4 traces (sphere?) up/down/left/right and deal damage to anything in contact. 
+	//destroy the tnt block
 }
 

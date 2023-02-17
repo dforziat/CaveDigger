@@ -26,6 +26,14 @@ public:
 	UFUNCTION()
 	void OnMeshHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void StartCountdown();
+
+
+	UFUNCTION(BlueprintCallable)
+	void Explode();
+
 private:
 	UPROPERTY(EditDefaultsOnly)
 	UStaticMeshComponent* Mesh;
@@ -38,5 +46,6 @@ private:
 
 	float DetonationTime = 3;
 	bool HasBeenTouched = false;
+
 
 };
