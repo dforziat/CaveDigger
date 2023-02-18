@@ -44,6 +44,9 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Sound")
 	USoundBase* ExplosionSound;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Particle")
+	UParticleSystem* ExplosionParticles;
+
 	float DetonationTime = 3;
 	bool HasBeenTouched = false;
 

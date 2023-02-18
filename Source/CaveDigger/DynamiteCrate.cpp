@@ -3,6 +3,8 @@
 
 #include "DynamiteCrate.h"
 #include "Components/PointLightComponent.h"
+#include "Kismet/GameplayStatics.h"
+
 
 
 // Sets default values
@@ -39,8 +41,15 @@ void ADynamiteCrate::OnMeshHit(UPrimitiveComponent* HitComponent, AActor* OtherA
 }
 
 void ADynamiteCrate::Explode() {
-	//PlayExplosion SFX and VFX
+	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionParticles, GetActorLocation());
+	UGameplayStatics::SpawnSoundAtLocation(this, ExplosionSound, GetActorLocation());
+
+	FHitResult HitResult;
+	//bool hit = GetWorld()->SweepSingleByChannel(HitResult, GetActorLocation(), );
+	DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + FVector(0,0,100), FColor::Red, false, 5);
+
+	Destroy();
 	//Do 4 traces (sphere?) up/down/left/right and deal damage to anything in contact. 
-	//destroy the tnt block
+
 }
 
