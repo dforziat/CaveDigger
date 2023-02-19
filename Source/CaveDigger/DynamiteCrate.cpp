@@ -4,6 +4,10 @@
 #include "DynamiteCrate.h"
 #include "Components/PointLightComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "DiggerCharacter.h"
+#include "DirtParent.h"
+#include "EnemyCharacterParent.h"
+
 
 
 
@@ -43,13 +47,40 @@ void ADynamiteCrate::OnMeshHit(UPrimitiveComponent* HitComponent, AActor* OtherA
 void ADynamiteCrate::Explode() {
 	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionParticles, GetActorLocation());
 	UGameplayStatics::SpawnSoundAtLocation(this, ExplosionSound, GetActorLocation());
-
+	FCollisionShape SweepShape = FCollisionShape::MakeSphere(ExplosionRadius);
+	FCollisionQueryParams QueryParams;
+	QueryParams.AddIgnoredActor(this);
 	FHitResult HitResult;
-	//bool hit = GetWorld()->SweepSingleByChannel(HitResult, GetActorLocation(), );
-	DrawDebugLine(GetWorld(), GetActorLocation(), GetActorLocation() + FVector(0,0,100), FColor::Red, false, 5);
+	bool UpHit = GetWorld()->SweepSingleByChannel(HitResult, GetActorLocation(), GetActorLocation() + FVector(0, 0, ExplosionDistance), FQuat::Identity, ECollisionChannel::ECC_WorldDynamic, SweepShape, QueryParams);
+	if (UpHit) {
+		CheckExplosionTargets(HitResult);
+	}
+	bool DownHit = GetWorld()->SweepSingleByChannel(HitResult, GetActorLocation(), GetActorLocation() + FVector(0, 0, -ExplosionDistance), FQuat::Identity, ECollisionChannel::ECC_WorldDynamic, SweepShape, QueryParams);
+	if (DownHit) {
+		CheckExplosionTargets(HitResult);
+	}
+	bool LeftHit = GetWorld()->SweepSingleByChannel(HitResult, GetActorLocation(), GetActorLocation() + FVector(0, -ExplosionDistance, 0), FQuat::Identity, ECollisionChannel::ECC_WorldDynamic, SweepShape, QueryParams);
+	if (LeftHit) {
+		CheckExplosionTargets(HitResult);
+	}
+	bool RightHit = GetWorld()->SweepSingleByChannel(HitResult, GetActorLocation(), GetActorLocation() + FVector(0, ExplosionDistance, 0), FQuat::Identity, ECollisionChannel::ECC_WorldDynamic, SweepShape, QueryParams);
+	if (RightHit) {
+		CheckExplosionTargets(HitResult);
+	}
 
 	Destroy();
-	//Do 4 traces (sphere?) up/down/left/right and deal damage to anything in contact. 
 
+}
+
+void ADynamiteCrate::CheckExplosionTargets(FHitResult HitResult) {
+	if (auto DiggerCharacter = Cast<ADiggerCharacter>(HitResult.GetActor())) {
+		DiggerCharacter->RecieveDamage(Damage, GetActorLocation());
+	}
+	else if (auto Dirt = Cast<ADirtParent>(HitResult.GetActor())) {
+		Dirt->TakeDigDamage(HitResult.ImpactPoint, Damage);
+	}
+	else if (auto Enemy = Cast<AEnemyCharacterParent>(HitResult.GetActor())) {
+		Enemy->RecieveDamage(Damage);
+	}
 }
 

@@ -21,7 +21,7 @@ protected:
 
 public:	
 	UFUNCTION(BlueprintCallable)
-	void TakeDigDamage(FVector DamageLocation = FVector::ZeroVector);
+	void TakeDigDamage(FVector DamageLocation = FVector::ZeroVector, int32 DamageAmount = 1);
 
 private:
 

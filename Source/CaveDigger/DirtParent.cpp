@@ -24,8 +24,8 @@ void ADirtParent::BeginPlay()
 	Super::BeginPlay();
 }
 
-void ADirtParent::TakeDigDamage(FVector DamageLocation) {
-	DamageStage += 1;
+void ADirtParent::TakeDigDamage(FVector DamageLocation, int32 DamageAmount) {
+	DamageStage += DamageAmount;
 	UGameplayStatics::PlaySoundAtLocation(this, DigSound, GetActorLocation(), 1.2F, 1 + (DamageStage / 10));
 	if(Health <= DamageStage) {
 		if (GemBluePrint != nullptr) {
@@ -34,7 +34,9 @@ void ADirtParent::TakeDigDamage(FVector DamageLocation) {
 		Destroy();
 		return;
 	}
-	StaticMeshComp->SetMaterial(0, MaterialList[DamageStage - 1]);
+	if (DamageStage <= MaterialList.Num()) {
+		StaticMeshComp->SetMaterial(0, MaterialList[DamageStage - 1]);
+	}
 
 	//Spawn Dirt Particle'
 	if (DamageLocation != FVector::ZeroVector) {

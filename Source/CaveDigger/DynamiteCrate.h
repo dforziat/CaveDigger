@@ -49,6 +49,11 @@ private:
 
 	float DetonationTime = 3;
 	bool HasBeenTouched = false;
+	float ExplosionDistance = 100;
+	float ExplosionRadius = 50;
+	int Damage = 3;
+
+	void CheckExplosionTargets(FHitResult HitResult);
 
 
 };
