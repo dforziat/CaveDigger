@@ -78,12 +78,23 @@ void UCaveDiggerGameInstance::AddPlayerGold(int Gold) {
 	TotalPlayerGold = TotalPlayerGold + Gold;
 }
 
+void UCaveDiggerGameInstance::AddToUpgradeMap(UTexture* UpgradeImage) {
+	if (UpgradeMap.Contains(UpgradeImage)) {
+		UpgradeMap.Add(UpgradeImage, UpgradeMap[UpgradeImage] += 1);
+	}
+	else {
+		UpgradeMap.Add(UpgradeImage,1);
+	}
+	//UE_LOG(LogTemp, Warning, TEXT("Upgrade Map: %s"),);
+}
+
 void UCaveDiggerGameInstance::ResetGameInstance() {
 	 HealthUpgrades = 0;
 	 HelmetUpgrades = 0;
 	 ShovelUpgrades = 0;
 	 AttackRangeUpgrades = 0;
 	 TimeUpgrades = 0;
+	 UpgradeMap.Empty();
 
 	//Player Stats
 	 TotalPlayerGems = 0;

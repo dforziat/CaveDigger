@@ -25,9 +25,11 @@ private:
 	int ShovelUpgrades = 0;
 	int AttackRangeUpgrades = 0;
 	int TimeUpgrades = 0;
+	TMap<UTexture*, int> UpgradeMap;
 
 	//Player Stats
-	int TotalPlayerGems = 0;
+	UPROPERTY(EditDefaultsOnly, meta = (AllowPrivateAccess = true))
+	int TotalPlayerGems = 2000;
 	int MineLevel = 1;
 	int TotalPlayerGold = 0;
 
@@ -74,6 +76,8 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetTotalPlayerGold();
 
+	UFUNCTION(BlueprintCallable)
+	void AddToUpgradeMap(UTexture* UpgradeImage);
 
 
 	UFUNCTION(BlueprintCallable)
