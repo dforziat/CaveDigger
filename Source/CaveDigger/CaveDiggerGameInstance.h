@@ -79,6 +79,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void AddToUpgradeMap(UTexture* UpgradeImage);
 
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	TMap<UTexture*, int>  GetUpgradeMap();
+
 
 	UFUNCTION(BlueprintCallable)
 	void ResetGameInstance();

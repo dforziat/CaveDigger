@@ -88,6 +88,10 @@ void UCaveDiggerGameInstance::AddToUpgradeMap(UTexture* UpgradeImage) {
 	//UE_LOG(LogTemp, Warning, TEXT("Upgrade Map: %s"),);
 }
 
+TMap<UTexture*, int> UCaveDiggerGameInstance::GetUpgradeMap() {
+	return UpgradeMap;
+}
+
 void UCaveDiggerGameInstance::ResetGameInstance() {
 	 HealthUpgrades = 0;
 	 HelmetUpgrades = 0;
