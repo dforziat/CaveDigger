@@ -36,9 +36,6 @@ public:
 	UFUNCTION(BlueprintImplementableEvent)
 	void FlickerSprite();
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	class UPaperFlipbookComponent* FlipbookComp;
-
 	UFUNCTION(BlueprintCallable)
 	int GetMaxHealth();
 
@@ -72,7 +69,7 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	class UCameraComponent* Camera;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
 	class USpotLightComponent* SpotLight;
 
 	UPROPERTY(EditDefaultsOnly)
@@ -80,6 +77,9 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	UClass* AttackBlueprint;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
+	class UPaperFlipbookComponent* FlipbookComp;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Flipbooks")
     class UPaperFlipbook* IdleFlipbook;
