@@ -21,10 +21,11 @@ private:
 
 	//Upgrades
 	int HealthUpgrades = 0;
-	int HelmetUpgrades = 0;
+	int HelmetLightUpgrades = 0;
 	int ShovelUpgrades = 0;
 	int AttackRangeUpgrades = 0;
 	int TimeUpgrades = 0;
+	bool HelmetUpgrade = false;
 	TMap<UTexture*, int> UpgradeMap;
 
 	//Player Stats
@@ -38,24 +39,28 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetHealthUpgrades();
 	UFUNCTION(BlueprintCallable, BlueprintPure)
-	int GetHelmetUpgrades();
+	int GetHelmetLightUpgrades();
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetShovelUpgrades();
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetTimeUpgrades();
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetAttackRangeUpgrades();
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	bool GetHelmetUpgrade();
 
 	UFUNCTION(BlueprintCallable)
 	void IncreaseHealthUpgrade();
 	UFUNCTION(BlueprintCallable)
-	void IncreaseHelmetUpgrade();
+	void IncreaseHelmetLightUpgrade();
 	UFUNCTION(BlueprintCallable)
 	void IncreaseShovelUpgrade();
 	UFUNCTION(BlueprintCallable)
 	void IncreaseTimeUpgrade();
 	UFUNCTION(BlueprintCallable)
 	void IncreaseAttackRangeUpgrades();
+	UFUNCTION(BlueprintCallable)
+	void SetHelmetUpgrade(bool DoHelmetUpgrade);
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetTotalPlayerGems();

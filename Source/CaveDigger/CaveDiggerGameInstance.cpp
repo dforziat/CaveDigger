@@ -11,8 +11,8 @@ int UCaveDiggerGameInstance::GetHealthUpgrades() {
 	return HealthUpgrades;
 }
 
-int UCaveDiggerGameInstance::GetHelmetUpgrades() {
-	return HelmetUpgrades;
+int UCaveDiggerGameInstance::GetHelmetLightUpgrades() {
+	return HelmetLightUpgrades;
 }
 
 int UCaveDiggerGameInstance::GetShovelUpgrades() {
@@ -31,8 +31,8 @@ void UCaveDiggerGameInstance::IncreaseHealthUpgrade() {
 	 HealthUpgrades++;
 }
 
-void UCaveDiggerGameInstance::IncreaseHelmetUpgrade() {
-	HelmetUpgrades++;
+void UCaveDiggerGameInstance::IncreaseHelmetLightUpgrade() {
+	HelmetLightUpgrades++;
 }
 
 void UCaveDiggerGameInstance::IncreaseShovelUpgrade() {
@@ -74,9 +74,19 @@ void UCaveDiggerGameInstance::SetMineLevel(int NewMineLevel) {
 int  UCaveDiggerGameInstance::GetTotalPlayerGold() {
 	return TotalPlayerGold;
 }
+
 void UCaveDiggerGameInstance::AddPlayerGold(int Gold) {
 	TotalPlayerGold = TotalPlayerGold + Gold;
 }
+
+void UCaveDiggerGameInstance::SetHelmetUpgrade(bool DoUpgradeHelmet) {
+	HelmetUpgrade = DoUpgradeHelmet;
+}
+
+bool UCaveDiggerGameInstance::GetHelmetUpgrade() {
+	return HelmetUpgrade;
+}
+
 
 void UCaveDiggerGameInstance::AddToUpgradeMap(UTexture* UpgradeImage) {
 	if (UpgradeMap.Contains(UpgradeImage)) {
@@ -94,7 +104,7 @@ TMap<UTexture*, int> UCaveDiggerGameInstance::GetUpgradeMap() {
 
 void UCaveDiggerGameInstance::ResetGameInstance() {
 	 HealthUpgrades = 0;
-	 HelmetUpgrades = 0;
+	 HelmetLightUpgrades = 0;
 	 ShovelUpgrades = 0;
 	 AttackRangeUpgrades = 0;
 	 TimeUpgrades = 0;

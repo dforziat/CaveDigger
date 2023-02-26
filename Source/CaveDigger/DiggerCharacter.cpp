@@ -257,7 +257,7 @@ void ADiggerCharacter::InitUpgrades() {
 	GameInstance = Cast<UCaveDiggerGameInstance>(GetGameInstance());
 	MaxHealth += GameInstance->GetHealthUpgrades();
 	Health = MaxHealth;
-	PointLight->AttenuationRadius += (GameInstance->GetHelmetUpgrades() * 50);
+	PointLight->AttenuationRadius += (GameInstance->GetHelmetLightUpgrades() * 50);
 }
 
 void ADiggerCharacter::PauseGame(const FInputActionInstance& Instance) {
