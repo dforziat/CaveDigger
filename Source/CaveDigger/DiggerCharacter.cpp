@@ -93,11 +93,13 @@ void ADiggerCharacter::MoveRight(const FInputActionInstance& Instance) {
 		FlipbookComp->SetRelativeRotation(FRotator(0,90,0));
 		FVector LightRightSide = FVector(2,1,6);
 		SpotLight->SetRelativeLocation(LightRightSide);
+		IsFacingRight = true;
 	}
 	else if (FloatValue < 0) {
 		FlipbookComp->SetRelativeRotation(FRotator(0, -90, 0));
 		FVector LightLeftSide = FVector(2, -1, 6);
 		SpotLight->SetRelativeLocation(LightLeftSide);
+		IsFacingRight = false;
 	}
 }
 

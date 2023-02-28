@@ -114,6 +114,9 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Sound")
 	USoundBase* AttackSound;
 
+	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = true))
+	bool IsFacingRight = true;
+
 
 	const FString IDLE_STATE = "Idle";
 	const FString RUN_STATE = "Run";

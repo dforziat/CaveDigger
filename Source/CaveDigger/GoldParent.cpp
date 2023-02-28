@@ -35,9 +35,4 @@ void AGoldParent::BeginPlay()
 void AGoldParent::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-}
-
-int AGemParent::GetValue() {
-	return Value;
 }
