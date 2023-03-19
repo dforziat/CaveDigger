@@ -215,8 +215,8 @@ void ADiggerCharacter::OnActorOverlap(AActor* OverlappedActor, AActor* OtherActo
 void ADiggerCharacter::RecieveDamage(int32 Damage, FVector DamageLocation) {
 	if (IsInvincible || State.Equals(DEATH_STATE)) return;
 	UE_LOG(LogTemp, Warning, TEXT("Took Damage from Enemy!"));
-
 	UGameplayStatics::PlaySoundAtLocation(this, HurtSound, GetActorLocation());
+
 	//Manage Invincible stuff
 	IsInvincible = true;
 	GetWorldTimerManager().SetTimer(InvincibleTimerHandle, this, &ADiggerCharacter::ResetInvincibleTimer, InvincibleTime, true);
@@ -227,6 +227,14 @@ void ADiggerCharacter::RecieveDamage(int32 Damage, FVector DamageLocation) {
 	LaunchCharacter(LaunchForce, true, true);
 
 	FlickerSprite();
+
+	if (IsWearingUpgradeHelmet) {
+		//play dink SFX
+		UGameplayStatics::PlaySoundAtLocation(this, HelmetHitSound, GetActorLocation());
+		//knock helmet off
+		KnockOffUpgradeHelmet();
+		return;
+	}
 
 
 	Health -= Damage;
@@ -260,6 +268,7 @@ void ADiggerCharacter::InitUpgrades() {
 	MaxHealth += GameInstance->GetHealthUpgrades();
 	Health = MaxHealth;
 	PointLight->AttenuationRadius += (GameInstance->GetHelmetLightUpgrades() * 50);
+	IsWearingUpgradeHelmet = GameInstance->GetHelmetUpgrade();
 }
 
 void ADiggerCharacter::PauseGame(const FInputActionInstance& Instance) {

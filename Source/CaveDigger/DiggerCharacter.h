@@ -48,6 +48,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Die();
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void KnockOffUpgradeHelmet();
+
 private:
 	UPROPERTY(EditDefaultsOnly)
 	class UInputMappingContext* InputMapping;
@@ -114,9 +117,14 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Sound")
 	USoundBase* AttackSound;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Sound")
+	USoundBase* HelmetHitSound;
+
 	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = true))
 	bool IsFacingRight = true;
 
+	UPROPERTY(BlueprintReadOnly, meta = (AllowPrivateAccess = true))
+	bool IsWearingUpgradeHelmet = false;
 
 	const FString IDLE_STATE = "Idle";
 	const FString RUN_STATE = "Run";
@@ -137,6 +145,8 @@ private:
 	bool IsInvincible = false;
 	float InvincibleTime = 2;
 
+
+
 	void MoveRight(const FInputActionInstance& Instance);
 	void Attack(const FInputActionInstance& Instance);
 	void Dig(const FInputActionInstance& Instance);
@@ -150,4 +160,6 @@ private:
 	void ResetInvincibleTimer();
 
 	void InitUpgrades();
+
+	
 };
