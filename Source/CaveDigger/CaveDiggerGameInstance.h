@@ -25,7 +25,7 @@ private:
 	int ShovelUpgrades = 0;
 	int AttackRangeUpgrades = 0;
 	int TimeUpgrades = 0;
-	bool HelmetUpgrade = false;
+	bool HelmetUpgrade = true;
 	TMap<UTexture*, int> UpgradeMap;
 
 	//Player Stats

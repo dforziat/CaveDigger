@@ -229,6 +229,7 @@ void ADiggerCharacter::RecieveDamage(int32 Damage, FVector DamageLocation) {
 	FlickerSprite();
 
 	if (IsWearingUpgradeHelmet) {
+		IsWearingUpgradeHelmet = false;
 		//play dink SFX
 		UGameplayStatics::PlaySoundAtLocation(this, HelmetHitSound, GetActorLocation());
 		//knock helmet off
