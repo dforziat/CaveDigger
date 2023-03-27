@@ -140,7 +140,7 @@ void ADiggerCharacter::Dig(const FInputActionInstance& Instance) {
 	bool hit = GetWorld()->LineTraceSingleByChannel(HitResult, GetActorLocation(), GetActorLocation() + FVector(0,0,-100), ECollisionChannel::ECC_Pawn, QueryParams);
 	if (hit) {
 		if (HitResult.GetActor()->ActorHasTag(TEXT("Dirt"))) {
-			Cast<ADirtParent>(HitResult.GetActor())->TakeDigDamage(HitResult.ImpactPoint);
+			Cast<ADirtParent>(HitResult.GetActor())->TakeDigDamage(HitResult.ImpactPoint, DigDamage);
 		}
 		else {
 			UGameplayStatics::PlaySoundAtLocation(this, DigClinkSound, GetActorLocation());
@@ -270,6 +270,7 @@ void ADiggerCharacter::InitUpgrades() {
 	Health = MaxHealth;
 	PointLight->AttenuationRadius += (GameInstance->GetHelmetLightUpgrades() * 50);
 	IsWearingUpgradeHelmet = GameInstance->GetHelmetUpgrade();
+	DigDamage += GameInstance->GetShovelUpgrades();
 }
 
 void ADiggerCharacter::PauseGame(const FInputActionInstance& Instance) {

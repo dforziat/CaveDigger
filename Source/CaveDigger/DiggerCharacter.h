@@ -142,6 +142,7 @@ private:
 	float AttackDistOffset = 80;
 	int Health = 3;
 	int MaxHealth = 3;
+	int DigDamage = 1;
 	bool IsInvincible = false;
 	float InvincibleTime = 2;
 
