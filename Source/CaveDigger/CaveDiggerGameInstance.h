@@ -26,6 +26,7 @@ private:
 	int AttackRangeUpgrades = 0;
 	int TimeUpgrades = 0;
 	bool HelmetUpgrade = false;
+	bool BackpackUpgrade = false;
 	TMap<UTexture*, int> UpgradeMap;
 
 	//Player Stats
@@ -48,6 +49,8 @@ public:
 	int GetAttackRangeUpgrades();
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	bool GetHelmetUpgrade();
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	bool GetBackpackUpgrade();
 
 	UFUNCTION(BlueprintCallable)
 	void IncreaseHealthUpgrade();
@@ -61,6 +64,8 @@ public:
 	void IncreaseAttackRangeUpgrades();
 	UFUNCTION(BlueprintCallable)
 	void SetHelmetUpgrade(bool DoHelmetUpgrade);
+	UFUNCTION(BlueprintCallable)
+	void SetBackpackUpgrade(bool DoBackpackUpgrade);
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	int GetTotalPlayerGems();

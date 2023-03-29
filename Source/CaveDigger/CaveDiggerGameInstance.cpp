@@ -87,6 +87,14 @@ bool UCaveDiggerGameInstance::GetHelmetUpgrade() {
 	return HelmetUpgrade;
 }
 
+void UCaveDiggerGameInstance::SetBackpackUpgrade(bool DoBackpackUpgrade) {
+	BackpackUpgrade = DoBackpackUpgrade;
+}
+
+bool UCaveDiggerGameInstance::GetBackpackUpgrade() {
+	return BackpackUpgrade;
+}
+
 
 void UCaveDiggerGameInstance::AddToUpgradeMap(UTexture* UpgradeImage) {
 	if (UpgradeMap.Contains(UpgradeImage)) {
